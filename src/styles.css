@@ -1,0 +1,118 @@
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color: #e0e0e0;
+  background-color: #34495e;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+/* Navigation */
+nav {
+  background-color: #2c3e50;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+nav a {
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+nav a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+nav a.active {
+  background-color: #4a50c7;
+  color: white;
+}
+
+/* Header */
+header {
+  background-color: #2c3e50;
+  color: white;
+  padding: 2rem 1rem;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+/* Layout */
+main {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+main p {
+  font-size: 1.2rem;
+}
+
+main img {
+  display: block;
+  margin: 1rem 0;
+  border-radius: 8px;
+}
+
+.img-small {
+  width: 100px;
+}
+
+.img-medium {
+  width: 200px;
+}
+
+main h2 {
+  margin-top: 2rem;
+}
+
+main h3 {
+  margin-top: 1.5rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* 404 */
+.not-found-title {
+  font-size: 5rem;
+}
+
+.not-found {
+  text-align: center;
+  padding: 3rem 2rem;
+}
+
+.not-found p {
+  margin-bottom: 2rem;
+}
+
+.not-found-link {
+  color: #ffffff;
+  text-decoration: none;
+  background-color: #4a50c7;
+  padding: 0.6rem 1.5rem;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+}
+
+.not-found-link:hover {
+  background-color: #5a60d7;
+}

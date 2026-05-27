@@ -1,0 +1,66 @@
+# Simple workflow for deploying static content to GitHub Pages
+name: Deploy static content to Pages
+
+on:
+  # Runs on pushes targeting the main branch
+  push:
+    branches: ["main"]
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# GitHub token permissions for deployment
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one deployment at a time, but let in-progress deploys finish
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages-deployment
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      # Download source code from repository
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      # Install Node.js with npm caching
+      - name: Set up Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: "npm"
+
+      # Install dependencies (faster than npm install)
+      - name: Install dependencies
+        run: npm ci
+
+      # Build React app for production
+      - name: Build
+        run: npm run build
+
+      # Copy index.html to 404.html for SPA routing
+      # This ensures React Router works on GitHub Pages
+      - name: Copy index.html to 404.html for SPA routing
+        run: cp ./dist/index.html ./dist/404.html
+
+      # Configure GitHub Pages
+      - name: Setup Pages
+        uses: actions/configure-pages@v6
+
+      # Upload build output
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: "./dist"
+
+      # Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5
