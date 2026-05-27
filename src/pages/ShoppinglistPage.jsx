@@ -1,11 +1,11 @@
-export default function ListPage() {
+export default function ShoppinglistPage() {
   return (
     <>
       <header>
         <h1>Indkøbsliste</h1>
       </header>
       <main>
-        <p>This is the list page.</p>
+        <p>This is the shopping list page.</p>
       </main>
     </>
   );
