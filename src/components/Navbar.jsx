@@ -4,9 +4,9 @@ export default function Navbar() {
   return (
     <nav>
       <NavLink to="/">Hjem</NavLink>
-      <NavLink to="shoppinglist">Indkøbsliste</NavLink>
-      <NavLink to="/saved">Gemte</NavLink>
-      <NavLink to="/profile">Profil</NavLink>
+      <NavLink to="indkøbsliste">Indkøbsliste</NavLink>
+      <NavLink to="/gemte">Gemte</NavLink>
+      <NavLink to="/profil">Profil</NavLink>
     </nav>
   );
 }

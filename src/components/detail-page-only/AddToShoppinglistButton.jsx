@@ -1,4 +1,4 @@
-export default function AddToShoppinglist() {
+export default function AddToShoppinglistButton() {
   return (
     <>
       <main>

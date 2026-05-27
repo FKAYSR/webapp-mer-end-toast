@@ -2,10 +2,10 @@ export default function SavedPage() {
   return (
     <>
       <header>
-        <h1>Saved</h1>
+        <h1>Gemte</h1>
       </header>
       <main>
-        <p>This is the saved page.</p>
+        <p>This is the gemte page.</p>
       </main>
     </>
   );
