@@ -1,11 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Rounded+Mplus+1c:wght@300;400;700&display=swap');
 
 :root {
-  /*Typography*/
+  /* Typography */
   --font-family: 'Rounded Mplus 1c', system-ui, Avenir, Helvetica, Arial, sans-serif;
   --line-height: 1.5;
-  --font-body-text: 25rem;
-  --font-bold: 37.5rem;
+  --font-weight-normal: 400;
+  --font-weight-bold: 700;
+
+  /* Sizes */
+  --font-size-h1: 2rem;
+  --font-size-h2: 1.25rem;
+  --font-size-h3: 1.063rem;
+  --font-size-body: 1rem;
+  --font-size-small: 0.875rem;
+  --font-size-mini: 0.813rem;
 
   /* Colors */
   --brand-color: #FBC41B;
@@ -49,6 +57,12 @@ body {
   margin: 16px;
   min-width: 320px;
   min-height: 100vh;
+  font-family: var(--font-family);
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-base);
+  font-weight: var(--font-weight-regular);
+  color: var(--text-color);
+  background-color: var(--background-color);
 }
 
 /* Navigation */
@@ -92,7 +106,8 @@ header {
 
 header h1 {
   margin: 0;
-  font-size: 2rem;
+  font-size: var(--font-size-h1);
+  font-weight: var(--font-weight-bold);
 }
 
 /* Layout */
@@ -103,7 +118,7 @@ main {
 }
 
 main p {
-  font-size: 1.2rem;
+  font-size: var(--font-size-body);
 }
 
 main img {
