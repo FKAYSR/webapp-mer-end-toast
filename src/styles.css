@@ -1,13 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Rounded+Mplus+1c:wght@300;400;700&display=swap');
+
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-  color: #e0e0e0;
-  background-color: #34495e;
+  /*Typography*/
+  --font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --line-height: 1.5;
+  --font-body-text: 25rem;
+  --font-bold: 37.5rem;
+
+  /* Colors */
+  --brand-color: #FBC41B;
+  --background-color: #e7e7e7;
+  --container-color: #58595a;
+  --container-big-color: #E8ECF1;
+  --price-color: #4D8400;
+  --text-color: #212125;
+  --warning-color: #EC4245;
+
+  /* Click colors */
+  --button-click: #E2B118;
+  --warning-click: #BF3E41;
+
+  /* Icon sizes */
+  --icon-size-extra-small: 0.813rem;
+  --icon-size-small: 1rem;
+  --icon-size-medium: 1.5rem;
+  --icon-size-large: 3rem;
+
+  /* Buttons */
+  --small-button: 1.5rem;
+  --big-button: 2rem;
+  --button-radius: 1rem;
+  --button-full-circle: 6.25rem;
+
+  /* Product cards */
+  --card-banner: #FBC41B;
+  --card-radius: 0.25rem;
+  --card-inner-gap: 0.25rem;
+  --card-grid-gap: 1rem;
+
+  /* Sections */
+  --section-bg: #F8F9FA;
+  --section-divider-color: #828282;
+  --section-divider-stroke-width: 0.125rem;
+  --section-gap: 1rem;
 }
 
 body {
-  margin: 0;
+  margin: 16px;
   min-width: 320px;
   min-height: 100vh;
 }
