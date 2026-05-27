@@ -1,20 +1,22 @@
 import { Routes, Route } from "react-router";
 import Navbar from "./components/Navbar";
 import HomePage from "./pages/HomePage";
-import AboutPage from "./pages/AboutPage";
-import ContactPage from "./pages/ContactPage";
+import SavedPage from "./pages/SavedPage";
+import ProfilePage from "./pages/ProfilePage";
 import NotFoundPage from "./pages/NotFoundPage";
+import ListPage from "./pages/ListPage";
 
 export default function App() {
   return (
     <>
-      <Navbar />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/contact" element={<ContactPage />} />
+        <Route path="/shoppinglist" element={<ListPage />} />
+        <Route path="/saved" element={<SavedPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
+      <Navbar />
     </>
   );
 }
