@@ -2,7 +2,7 @@
 
 :root {
   /*Typography*/
-  --font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --font-family: 'Rounded Mplus 1c', system-ui, Avenir, Helvetica, Arial, sans-serif;
   --line-height: 1.5;
   --font-body-text: 25rem;
   --font-bold: 37.5rem;
