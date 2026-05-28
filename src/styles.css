@@ -119,7 +119,6 @@ header {
   color: var(--text-color);
   padding: 2rem 1rem;
   text-align: center;
-  box-shadow: var(--shadow);
   z-index: 1000;
 }
 
@@ -226,8 +225,11 @@ main h3 {
 }
 
 .searchbar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
   display: flex;
-  width: 100%;
   padding: 0.5rem;
   justify-content: flex-start;
   align-items: center;
@@ -236,12 +238,13 @@ main h3 {
   background: var(--container-color);
   box-shadow: var(--shadow);
   box-sizing: border-box;
+  z-index: 900;
 }
 
 .searchbar-control {
   width: 100%;
   border: none;
-  background: transparent;
+  background: var(--container-color);
   color: var(--text-color);
   font: var(--font-size-body);
   outline: none;

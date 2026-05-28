@@ -40,6 +40,10 @@ export default function SearchPage() {
     navigate(`/produkter?query=${encodeURIComponent(query)}`);
   };
 
+  const handleSuggestionClick = (navn) => {
+    navigate(`/produkter?query=${encodeURIComponent(navn)}`);
+  };
+
   return (
     <>
       <header>
@@ -55,7 +59,9 @@ export default function SearchPage() {
         {suggestions.length > 0 && (
           <ul>
             {suggestions.map((item) => (
-              <li key={item.id}>{item.navn}</li>
+              <li key={item.id}>
+                <button type="button" className="suggestion-button" onClick={() => handleSuggestionClick(item.navn)}>{item.navn}</button>
+              </li>
             ))}
           </ul>
         )}
