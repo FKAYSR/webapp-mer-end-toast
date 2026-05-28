@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Checkbox from "./Checkbox";
 import { supabase } from "../supabaseClient";
 
-export default function List({title = "Vare kategori", table = "ingredienser"}) {
+export default function List({title = "Vare kategori", table = "ingredienser", showPrice = true}) {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -40,7 +40,15 @@ export default function List({title = "Vare kategori", table = "ingredienser"}) 
             <label className="liste-række">
               <span>{item.standard_mængde}</span>
               <span>{item.enhed}</span>
-              <span>{item.navn}</span> 
+              <span>{item.navn}</span>
+              {showPrice && (
+                <span className="pris">
+                  {Number(item.pris ?? 0).toLocaleString("da-DK", {
+                    minimumFractionDigits: 0,
+                    maximumFractionDigits: 2,
+                  })} kr
+                </span>
+              )}
               <Checkbox />
             </label>
           </li>
