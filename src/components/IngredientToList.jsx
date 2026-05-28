@@ -1,8 +1,8 @@
-import { useRef, useeffect } from "react";
+import { useRef, useEffect } from "react";
+import CloseButton from "../assets/close-icon-large.svg";
 
-export default function IngredientToList() {
-  const dialog = dialogRef.current;
-  if (!dialog) return;
+export default function IngredientToList({ isOpen, onClose }) {
+  const dialogRef = useRef(null);
 
   useEffect(() => {
     const dialog = dialogRef.current;
@@ -22,7 +22,7 @@ export default function IngredientToList() {
     const data = Object.fromEntries(formData);
     console.log("Gemmer data i databasen:", data);
 
-    onclose();
+    onClose();
   };
 
   return (
@@ -36,11 +36,18 @@ export default function IngredientToList() {
 
         <form onSubmit={handleSubmit}>
           <label>
-            Navn:
+            Navn på vare:
             <input type="text" name="name" required />
           </label>
+          <label>
+            Vælg kategori
+            <select name="Varekategori"></select>
+          </label>
           <div className="modal-actions">
-            <button type="button" onClick={onClose}></button>
+            <button type="button" onClick={onClose}>
+              Anuller
+            </button>
+            <button type="submit">Gem</button>
           </div>
         </form>
       </div>
