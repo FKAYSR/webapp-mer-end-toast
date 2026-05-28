@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Checkbox from "./Checkbox";
 import { supabase } from "../supabaseClient";
 
-export default function List({title = "Vare kategori", table = "ingredienser", showPrice = true}) {
+export default function List({table = "ingredienser", showPrice = true}) {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -15,6 +15,7 @@ export default function List({title = "Vare kategori", table = "ingredienser", s
            .from(table)
            .select("*")
            .eq("added_to_list", true)
+           .order("afdeling", {ascending: true})
            .order("id", { ascending: true })
          if (error) throw error;
          setItems(data ?? []);
@@ -29,13 +30,22 @@ export default function List({title = "Vare kategori", table = "ingredienser", s
      })();
    }, [table]);
 
+    const groupedItems = items.reduce((groups, item) => {
+      const afdeling = item.afdeling ?? "Ukendt afdeling";
+      if (!groups[afdeling]) groups[afdeling] = [];
+      groups[afdeling].push(item);
+      return groups;
+    }, {}); 
+
   return (
-    <section>
-      <h2>{title}</h2>
+    <>
+    {Object.entries(groupedItems).map(([afdeling, afdelingItems]) => (
+    <section key={afdeling}>
+      <h2>{afdeling}</h2>
       {loading && <p>Indlæser...</p>}
       {error && <p>Fejl: {error.message}</p>}
       <ul className="liste-punkter">
-        {items.map((item) => (
+        {afdelingItems.map((item) => (
           <li key={item.id}>
             <label className="liste-række">
               <span>{item.standard_mængde}</span>
@@ -55,5 +65,7 @@ export default function List({title = "Vare kategori", table = "ingredienser", s
         ))}
       </ul>
     </section>
+    ))}
+    </>
   );
 }
