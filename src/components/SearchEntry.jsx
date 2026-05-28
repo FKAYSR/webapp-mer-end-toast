@@ -10,7 +10,7 @@ export default function SearchEntry() {
   return (
     <button
       type="button"
-      className="searchbar"
+      className="searchbar searchbar-button searchbar-control"
       onClick={handleClick}
     >
       Søg fx frokost, gulerødder

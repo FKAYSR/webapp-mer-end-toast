@@ -6,8 +6,9 @@ export default function SearchInput({ value, onChange }) {
   return (
     <label className="searchbar" htmlFor={id}>
       <input
+        autoFocus
         id={id}
-        className="searchbar"
+        className="searchbar-control"
         type="text"
         placeholder="Søg fx frokost, gulerødder"
         value={value}

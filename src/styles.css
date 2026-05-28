@@ -224,3 +224,34 @@ main h3 {
   align-items: center;
   width: 100%;
 }
+
+.searchbar {
+  display: flex;
+  width: 100%;
+  padding: 0.5rem;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 6.25rem;
+  background: var(--container-color);
+  box-shadow: var(--shadow);
+  box-sizing: border-box;
+}
+
+.searchbar-control {
+  width: 100%;
+  border: none;
+  background: transparent;
+  color: var(--text-color);
+  font: var(--font-size-body);
+  outline: none;
+  box-sizing: border-box;
+}
+
+.searchbar-control::placeholder {
+  color: var(--fifty-text-color);
+}
+
+.searchbar-button {
+  cursor: pointer;
+}
