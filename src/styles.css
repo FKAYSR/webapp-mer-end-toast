@@ -175,3 +175,12 @@ main h3 {
 .not-found-link:hover {
   background-color: var(--warning-click);
 }
+
+.liste-punkt {
+  display: flex;
+  width: 22.5rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: var(0.5rem, 0.5rem);
+}

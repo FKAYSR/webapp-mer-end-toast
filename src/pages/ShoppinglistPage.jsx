@@ -1,3 +1,5 @@
+import List from "../components/List";
+
 export default function ShoppinglistPage() {
   return (
     <>
@@ -6,6 +8,7 @@ export default function ShoppinglistPage() {
       </header>
       <main>
         <p>This is the shopping list page.</p>
+        <List />
       </main>
     </>
   );
