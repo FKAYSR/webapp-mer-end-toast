@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 import SearchInput from "../components/SearchInput";
 import { supabase } from "../supabaseClient";
 
 export default function SearchPage() {
   const [query, setQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchSuggestions = async () => {
@@ -32,13 +34,21 @@ export default function SearchPage() {
     fetchSuggestions();
   }, [query]);
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (!query.trim()) return;
+    navigate(`/produkter?query=${encodeURIComponent(query)}`);
+  };
+
   return (
     <>
       <header>
-        <SearchInput
-          value={query}
-          onChange={(event) => setQuery(event.target.value)}
-        />
+        <form onSubmit={handleSubmit}>
+          <SearchInput
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
+          />
+        </form>
       </header>
 
       <main>
