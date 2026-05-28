@@ -2,21 +2,20 @@ import { useEffect, useState } from "react";
 import Checkbox from "./Checkbox";
 import { supabase } from "../supabaseClient";
 
-export default function List({title = "Vare kategori", table = "items"}) {
+export default function List({title = "Vare kategori", table = "ingredienser"}) {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
    useEffect(() => {
-     const ac = new AbortController();
      (async () => {
        try {
          setLoading(true);
          const { data, error } = await supabase
            .from(table)
            .select("*")
+           .eq("added_to_list", true)
            .order("id", { ascending: true })
-           .abortSignal(ac.signal);
          if (error) throw error;
          setItems(data ?? []);
        } catch (err) {
@@ -28,7 +27,6 @@ export default function List({title = "Vare kategori", table = "items"}) {
          setLoading(false);
        }
      })();
-     return () => ac.abort();
    }, [table]);
 
   return (
@@ -40,7 +38,9 @@ export default function List({title = "Vare kategori", table = "items"}) {
         {items.map((item) => (
           <li key={item.id}>
             <label className="liste-række">
-              <span>{item.name}</span> 
+              <span>{item.standard_mængde}</span>
+              <span>{item.enhed}</span>
+              <span>{item.navn}</span> 
               <Checkbox />
             </label>
           </li>
