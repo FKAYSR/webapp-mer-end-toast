@@ -18,11 +18,17 @@
   /* Colors */
   --brand-color: #FBC41B;
   --background-color: #e7e7e7;
-  --container-color: #58595a;
+  --container-color: #F8F9FA;
   --container-big-color: #E8ECF1;
   --price-color: #4D8400;
   --text-color: #212125;
+  --fifty-text-color: #828282;
   --warning-color: #EC4245;
+  --light-grey: #E7E7E7;
+  --grey: #E0E0E0;
+  --dark-grey: #C0C0C0;
+  --darkest-grey: #4E4E4E;
+
 
   /* Click colors */
   --button-click: #E2B118;
@@ -90,7 +96,7 @@ nav {
 }
 
 nav a {
-  color: var(--container-color);
+  color: var(--fifty-text-color);
   text-decoration: none;
   padding: 0.5rem 1rem;
   border-radius: 4px;
@@ -114,6 +120,7 @@ header {
   padding: 2rem 1rem;
   text-align: center;
   box-shadow: var(--shadow);
+  z-index: 1000;
 }
 
 header h1 {
@@ -176,11 +183,28 @@ main h3 {
   background-color: var(--warning-click);
 }
 
-.liste-punkt {
+.liste-punkter {
+  list-style: none;
+  background-color: var(--container-color);
+  margin: 1rem;
+  padding: 0;
   display: flex;
-  width: 22.5rem;
+  width: 100vw;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  gap: var(0.5rem, 0.5rem);
+  gap: 0.5rem;
+  border-radius: 1rem;
+}
+
+.liste-punkter > li {
+  display: block;
+  box-sizing: border-box;
+  padding: 1rem 1rem;
+  width: 100%;
+  border-bottom: 2px solid var(--fifty-text-color);
+}
+
+.liste-punkter > li:last-child {
+  border-bottom: none;
 }

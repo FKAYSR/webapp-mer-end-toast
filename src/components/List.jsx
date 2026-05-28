@@ -1,7 +1,12 @@
-export default function List() {
+export default function List({title = "Vare kategori"}) {
   return (
-    <ul className="liste-punkt">
-        <li>Supabase</li>
-    </ul>
+    <section>
+      <h2>{title}</h2>
+      <ul className="liste-punkter">
+        <li>Supabase item</li>
+        <li>Vare</li>
+        <li>Vare</li>
+      </ul>
+    </section>
   );
 }
