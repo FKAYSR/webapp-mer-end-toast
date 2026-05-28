@@ -1,15 +1,21 @@
 import List from "../components/List";
+import Navbar from "../components/Navbar";
+import AddButton from "../components/AddButton";
+import VarerOpskriftSwicher from "../components/VarerOpskriftSwicher";
 
 export default function ShoppinglistPage() {
   return (
     <>
       <header>
-        <h1>Indkøbsliste</h1>
+        <AddButton />
       </header>
       <main>
-        <p>This is the shopping list page.</p>
+        <VarerOpskriftSwicher />
         <List />
       </main>
+      <footer>
+        <ListePris />
+      </footer>
     </>
   );
 }
