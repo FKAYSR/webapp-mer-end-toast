@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router";
 
-export default function Searchbar() {
+export default function SearchEntry() {
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -8,10 +8,12 @@ export default function Searchbar() {
   };
 
   return (
-    <input
-      type="text"
-      placeholder="Søg fx frokost, gulerødder"
+    <button
+      type="button"
+      className="searchbar"
       onClick={handleClick}
-    />
+    >
+      Søg fx frokost, gulerødder
+    </button>
   );
 }
