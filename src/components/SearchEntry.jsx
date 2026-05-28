@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router";
+import searchIcon from "../assets/ikoner/search-icon.svg";
 
 export default function SearchEntry() {
   const navigate = useNavigate();
@@ -12,8 +13,10 @@ export default function SearchEntry() {
       type="button"
       className="searchbar searchbar-button searchbar-control"
       onClick={handleClick}
+      aria-label="Gå til søge siden"
     >
-      Søg fx frokost, gulerødder
+      <img src={searchIcon} alt="" className="searchbar-icon" />
+      <span>Søg fx frokost, gulerødder</span>
     </button>
   );
 }

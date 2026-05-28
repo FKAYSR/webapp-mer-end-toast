@@ -1,10 +1,15 @@
 import { useId } from "react";
+import searchIcon from "../assets/ikoner/search-icon.svg";
 
 export default function SearchInput({ value, onChange }) {
   const id = useId();
 
   return (
     <label className="searchbar" htmlFor={id}>
+        <button type="submit" className="searchbar-icon" aria-label="Søg">
+            <img src={searchIcon} alt="" />
+        </button>
+
       <input
         autoFocus
         id={id}
