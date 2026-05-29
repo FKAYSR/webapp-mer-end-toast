@@ -458,3 +458,9 @@ main h3 {
   right: 0.75rem;
   width: 2rem;
 }
+
+.settings-navigate {
+  border: none;
+  padding: 0;
+  margin: 0;
+}

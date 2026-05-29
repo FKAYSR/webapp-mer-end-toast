@@ -8,9 +8,11 @@ import preferenceIcon from "../assets/ikoner/food-preference-icon.svg";
 import allergyIcon from "../assets/ikoner/allergy-icon.svg"
 import profilePicture from "../assets/profile-picture.png"
 import settingsIcon from "../assets/ikoner/settings-icon.svg"
+import { useNavigate } from "react-router";
 
 export default function ProfilePage() {
     const [recipes, setRecipes] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
       const loadRecipes = async () => {
@@ -32,7 +34,13 @@ export default function ProfilePage() {
   return (
     <>
       <header className="profile-header">
-        <img src={settingsIcon} alt="indstillinger" className="settings-icon" />
+        <button className="settings-navigate" type="button" onClick={() => navigate("/indstillinger")} aria-label="Indstillinger">
+          <img
+            src={settingsIcon}
+            alt="indstillinger"
+            className="settings-icon"
+          />
+        </button>
         <div className="profile-center">
           <img src={profilePicture} alt="profile billede" />
           <h1>Bruger navn</h1>
