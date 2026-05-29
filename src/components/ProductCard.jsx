@@ -16,7 +16,7 @@ export default function ProductCard({
     onClick={() => navigate(`/opskrift?id=${id}`)}>
       {image && (
         <div className="product-card-image-wrapper">
-          <img className="product-card-image" src={image} alt={title ?? ""} />
+          <img className="product-card-image" src={image} alt={title ?? ""} loading="lazy" decoding="async"/>
         </div>
       )}
 
