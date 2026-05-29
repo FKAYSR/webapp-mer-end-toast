@@ -87,7 +87,7 @@ nav {
   padding: 1rem 2rem;
   box-shadow: var(--shadow);
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   gap: 0.5rem;
   position: fixed;
   bottom: 0;
@@ -410,4 +410,35 @@ main h3 {
   text-align: left;
   font-size: xx-large;
   font-weight: var(--font-weight-bold);
+}
+
+.preference-button{
+  display: flex;
+  width: 6.85419rem;
+  height: 6.4375rem;
+  padding: 1rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  border-radius: 1rem;
+  background: var(--container-color);
+  border: none;
+}
+
+.preference-row {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.preference-icon {
+  width: 2rem;
+}
+
+.preference-text {
+  font: var(--font-size-h3);
+  color: var(--text-color);
+  text-align: center;
 }
