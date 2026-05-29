@@ -282,8 +282,7 @@ main h3 {
   flex-direction: column;
   overflow: hidden;
   border-radius: var(--card-radius);
-  background: var(--container-color);
-  box-shadow: var(--shadow);
+  background: transparent;
   min-height: 15rem;
 }
 
@@ -303,7 +302,6 @@ main h3 {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--container-big-color);
 }
 
 .product-card-image {
@@ -391,4 +389,25 @@ main h3 {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--card-grid-gap);
+}
+
+.hero-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.logo-home {
+  width: 12rem;
+  height: auto;
+  padding: 1rem;
+}
+
+.home-text {
+  margin: 0;
+  text-align: left;
+  font-size: xx-large;
+  font-weight: var(--font-weight-bold);
 }

@@ -31,12 +31,13 @@ export default function HomePage() {
         <SearchEntry />
       </header>
       <main>
-        <article>
+        <article className="hero-section">
           <img
             src={reactRouterLogo}
             alt="Mer' end Toast logo af 2 toasts"
             className="logo-home"
           />
+          <p className="home-text">Mer' end Toast</p>
         </article>
         <ProductGrid title="Mest populære" variant="horizontal">
           {recipes.map((recipe) => (
