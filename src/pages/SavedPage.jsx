@@ -25,11 +25,7 @@ export default function SavedPage() {
 
   return (
     <>
-      <header>
-        <h1>Gemte</h1>
-      </header>
       <main>
-        <p>This is the gemte page.</p>
         <ProductGrid title="Dine livretter (mest brugte)" variant="horizontal">
           {recipes.map((recipe) => (
             <ProductCard
