@@ -19,7 +19,8 @@
     "@supabase/supabase-js": "^2.106.2",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
-    "react-router": "^7.15.1"
+    "react-router": "^7.15.1",
+    "@supabase/supabase-js": "^2.0.0"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

@@ -1,9 +1,7 @@
-export default function Checkbox() {
+export default function Checkbox({ defaultChecked = false, onChange }) {
   return (
-    <>
-      <main>
-        <p>This is the checkbox component</p>
-      </main>
-    </>
+    <label className="checkbox">
+      <input type="checkbox" defaultChecked={defaultChecked} onChange={onChange} />
+    </label>
   );
 }

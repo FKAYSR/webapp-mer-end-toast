@@ -1,11 +1,11 @@
 import reactRouterLogo from "../assets/logo.svg";
-import Searchbar from "../components/Searchbar";
+import SearchEntry from "../components/SearchEntry";
 
 export default function HomePage() {
   return (
     <>
       <header>
-        <Searchbar />
+        <SearchEntry />
       </header>
       <main>
         <article>
