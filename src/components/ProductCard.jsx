@@ -1,15 +1,19 @@
+import { useNavigate } from "react-router";
+
 export default function ProductCard({
+  id,
   title,
   price,
   time,
   image,
   variant = "large",
-  onClick,
 }) {
-  const cardClassName = `product-card product-card--${variant}`;
+  const cardClassName = `product-card product-card-${variant}`;
+  const navigate = useNavigate();
 
   return (
-    <article className={cardClassName}>
+    <article className={cardClassName}
+    onClick={() => navigate(`/opskrift?id=${id}`)}>
       {image && (
         <div className="product-card-image-wrapper">
           <img className="product-card-image" src={image} alt={title ?? ""} />
@@ -29,18 +33,9 @@ export default function ProductCard({
             </span>
           )}
 
-          {time && <span className="product-card__time">{time} min</span>}
+          {time && <span className="product-card-time">{time} min</span>}
         </div>
       </div>
-
-      {onClick && (
-        <button
-          type="button"
-          className="product-card__button"
-          onClick={onClick}
-          aria-label={title ? `Vælg ${title}` : "Vælg opskrift"}
-        />
-      )}
     </article>
   );
 }
