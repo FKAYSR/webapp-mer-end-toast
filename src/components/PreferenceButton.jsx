@@ -1,9 +1,15 @@
-export default function PreferencButton() {
+import { useNavigate } from "react-router";
+
+export default function PreferencButton({ to, icon, children }) {
+  const navigate = useNavigate();
+
   return (
-    <>
-      <main>
-        <p>This is the precerence button used on the profilePage</p>
-      </main>
-    </>
+    <button type="button" 
+    className="preference-button"
+    onClick={() => navigate(to)}
+    aria-label={typeof children === "string" ? children : "Åbn"}>
+      {icon && <img src={icon} alt="" className="preference-icon"/>}
+      <span className="preference-text">{children}</span>
+    </button>
   );
 }

@@ -2,6 +2,10 @@ import ProductCard from "../components/ProductCard";
 import ProductGrid from "../components/ProductGrid";
 import { supabase } from "../supabaseClient";
 import { useEffect, useState } from "react";
+import PreferencButton from "../components/PreferenceButton";
+import shopIcon from "../assets/ikoner/butik-icon.svg";
+import preferenceIcon from "../assets/ikoner/food-preference-icon.svg";
+import allergyIcon from "../assets/ikoner/allergy-icon.svg"
 
 export default function ProfilePage() {
     const [recipes, setRecipes] = useState([]);
@@ -26,23 +30,27 @@ export default function ProfilePage() {
   return (
     <>
       <header>
-        <h1>Profile</h1>
+        <h1>Bruger navn</h1>
       </header>
       <main>
-        <p>This is the profile page.</p>
-                <ProductGrid title="Senest lavet" variant="horizontal">
-                  {recipes.map((recipe) => (
-                    <ProductCard
-                      key={recipe.id}
-                      id={recipe.id}
-                      variant="small"
-                      title={recipe.navn}
-                      price={recipe.pris_portion}
-                      time={recipe.tid}
-                      image={recipe.billede}
-                    />
-                  ))}
-                </ProductGrid>
+        <div className="preference-row">
+          <PreferencButton to="/kost-præferencer" icon={preferenceIcon}>Kost præferencer</PreferencButton>
+          <PreferencButton to="/dine-lokale-butikker" icon={shopIcon}>Dine lokale butikker</PreferencButton>
+          <PreferencButton to="/allergi" icon={allergyIcon}>Allergener</PreferencButton>
+        </div>
+        <ProductGrid title="Senest lavet" variant="horizontal">
+          {recipes.map((recipe) => (
+            <ProductCard
+              key={recipe.id}
+              id={recipe.id}
+              variant="small"
+              title={recipe.navn}
+              price={recipe.pris_portion}
+              time={recipe.tid}
+              image={recipe.billede}
+            />
+          ))}
+        </ProductGrid>
       </main>
     </>
   );
