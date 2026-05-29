@@ -6,6 +6,8 @@ import PreferencButton from "../components/PreferenceButton";
 import shopIcon from "../assets/ikoner/butik-icon.svg";
 import preferenceIcon from "../assets/ikoner/food-preference-icon.svg";
 import allergyIcon from "../assets/ikoner/allergy-icon.svg"
+import profilePicture from "../assets/profile-picture.png"
+import settingsIcon from "../assets/ikoner/settings-icon.svg"
 
 export default function ProfilePage() {
     const [recipes, setRecipes] = useState([]);
@@ -29,14 +31,24 @@ export default function ProfilePage() {
 
   return (
     <>
-      <header>
-        <h1>Bruger navn</h1>
+      <header className="profile-header">
+        <img src={settingsIcon} alt="indstillinger" className="settings-icon" />
+        <div className="profile-center">
+          <img src={profilePicture} alt="profile billede" />
+          <h1>Bruger navn</h1>
+        </div>
       </header>
       <main>
         <div className="preference-row">
-          <PreferencButton to="/kost-præferencer" icon={preferenceIcon}>Kost præferencer</PreferencButton>
-          <PreferencButton to="/dine-lokale-butikker" icon={shopIcon}>Dine lokale butikker</PreferencButton>
-          <PreferencButton to="/allergi" icon={allergyIcon}>Allergener</PreferencButton>
+          <PreferencButton to="/kost-præferencer" icon={preferenceIcon}>
+            Kost præferencer
+          </PreferencButton>
+          <PreferencButton to="/dine-lokale-butikker" icon={shopIcon}>
+            Dine lokale butikker
+          </PreferencButton>
+          <PreferencButton to="/allergi" icon={allergyIcon}>
+            Allergener
+          </PreferencButton>
         </div>
         <ProductGrid title="Senest lavet" variant="horizontal">
           {recipes.map((recipe) => (
