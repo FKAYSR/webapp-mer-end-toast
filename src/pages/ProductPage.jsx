@@ -3,6 +3,7 @@ import { supabase } from "../supabaseClient";
 import ProductCard from "../components/ProductCard";
 import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router";
+import ProductGrid from "../components/ProductGrid";
 
 export default function ProductPage() {
   const [recipes, setRecipes] = useState([]);
@@ -26,37 +27,44 @@ export default function ProductPage() {
     loadRecipes();
   }, [])
 
+  const filterRecipes = recipes.filter((r) => {
+    if (!q) return true;
+    try {
+      const array = Array.isArray(r.ingredienser_ids)
+      ? r.ingredienser_ids : JSON.parse(r.ingredienser_ids || "[]");
+      return Array.isArray(array) && array.some((text) => 
+      String(text).toLowerCase().includes(q.toLowerCase())
+    );
+    } catch (e) {
+      console.error(e);
+      return false;
+    }
+  })
+
   return (
     <>
       <header>
         <SearchEntry />
       </header>
-      
+
       <main>
-        <section className="card-grid">
-          {
-            (q.trim() ? recipes.filter((r) => {
-              const term = q.trim().toLowerCase();
-              const vals = r.ingredienser_ids;
-              let arr = [];
-              if (!vals) return false;
-              if (Array.isArray(vals)) arr = vals;
-              else if (typeof vals === 'string') {
-                try { arr = JSON.parse(vals); } catch { arr = [vals]; }
-              }
-              return arr.some((ing) => String(ing).toLowerCase().includes(term));
-            }) : recipes).map((recipe) => (
-              <ProductCard
-                key={recipe.id}
-                variant="large"
-                title={recipe.navn}
-                price={recipe.pris_portion}
-                time={recipe.tid}
-                image={recipe.billede}
-              />
-            ))
-          }
-        </section>
+        <ProductGrid title="Søgeresultater" variant="vertical">
+          {q && filterRecipes.length === 0 ? ( 
+            <p>Der blev desværre ikke fundet nogle opskrifter der matcher din søgning "{q}"...</p>
+          ) : (
+          filterRecipes.map((recipe) => (
+            <ProductCard
+              key={recipe.id}
+              id={recipe.id}
+              variant="large"
+              title={recipe.navn}
+              price={recipe.pris_portion}
+              time={recipe.tid}
+              image={recipe.billede}
+            />
+          ))
+        )}
+        </ProductGrid>
       </main>
     </>
   );
