@@ -49,7 +49,10 @@ export default function ProductPage() {
 
       <main>
         <ProductGrid title="Søgeresultater" variant="vertical">
-          {filterRecipes.map((recipe) => (
+          {q && filterRecipes.length === 0 ? ( 
+            <p>Der blev desværre ikke fundet nogle opskrifter der matcher din søgning "{q}"...</p>
+          ) : (
+          filterRecipes.map((recipe) => (
             <ProductCard
               key={recipe.id}
               id={recipe.id}
@@ -59,7 +62,8 @@ export default function ProductPage() {
               time={recipe.tid}
               image={recipe.billede}
             />
-          ))}
+          ))
+        )}
         </ProductGrid>
       </main>
     </>
