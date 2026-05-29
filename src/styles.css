@@ -107,13 +107,18 @@ nav a {
 }
 
 nav a:hover {
-  background-color: var(--section-divider-color);
   color: var(--text-color);
 }
 
 nav a.active {
-  background-color: var(--brand-color);
   color: var(--text-color);
+}
+
+nav .nav-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0rem;
 }
 
 /* Header */
