@@ -1,4 +1,4 @@
-import { createClient } from "@supabase/supabase-backend-js"; // eller '@supabase/supabase-js' alt efter din pakke
+import { createClient } from "@supabase/supabase-js"; // eller '@supabase/supabase-js' alt efter din pakke
 
 // Her henter vi de faste værdier fra din .env fil
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
