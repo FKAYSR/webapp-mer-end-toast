@@ -156,7 +156,7 @@ export default function DetailPage() {
 
         {ingredients.length > 0 && (
           <>
-          <ul>
+          <ul className="detail-ingredients">
             {ingredients.map((ingredient) => (
               <li key={ingredient.id}>
                 <div>
