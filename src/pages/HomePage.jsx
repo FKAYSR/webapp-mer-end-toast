@@ -8,22 +8,22 @@ import { useEffect, useState } from "react";
 export default function HomePage() {
   const [recipes, setRecipes] = useState([]);
 
-    useEffect(() => {
-      const loadRecipes = async () => {
-        const { data, error } = await supabase
-          .from("opskrifter")
-          .select("id, navn, pris_portion, tid, billede, ingredienser_ids");
-  
+  useEffect(() => {
+    const loadRecipes = async () => {
+      const { data, error } = await supabase
+        .from("opskrifter")
+        .select("id, navn, pris_portion, tid, billede, ingredienser_ids");
+
       if (error) {
         console.error("Supabase error:", error);
         return;
       }
-  
+
       setRecipes(data ?? []);
-      };
-  
-      loadRecipes();
-    }, [])
+    };
+
+    loadRecipes();
+  }, []);
 
   return (
     <>

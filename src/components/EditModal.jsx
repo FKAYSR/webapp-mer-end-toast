@@ -119,39 +119,40 @@ export default function EditModal({ item, onClose, table, onRefresh }) {
         <h2>Rediger {item.navn}</h2>
 
         <form onSubmit={handleUpdate}>
-          <label>
-            Mængde:
-            <input
-              type="number"
-              name="mængde"
-              defaultValue={item.standard_mængde}
-              required
-            />
-          </label>
+          <div className="modal-content-section">
+            <label>
+              Mængde:
+              <input
+                type="number"
+                name="mængde"
+                defaultValue={item.standard_mængde}
+                required
+              />
+            </label>
+          </div>
 
-          <label>
-            Afdeling:
-            <select
-              name="afdeling"
-              defaultValue={item.afdeling ?? "Ukendt afdeling"}
-            >
-              {afdelinger.map((afdelingNavn) => (
-                <option key={afdelingNavn} value={afdelingNavn}>
-                  {afdelingNavn}
-                </option>
-              ))}
+          <div className="modal-content-section">
+            <label>
+              Afdeling:
+              <select
+                name="afdeling"
+                defaultValue={item.afdeling ?? "Ukendt afdeling"}
+              >
+                {afdelinger.map((afdelingNavn) => (
+                  <option key={afdelingNavn} value={afdelingNavn}>
+                    {afdelingNavn}
+                  </option>
+                ))}
 
-              {/* fallback hvis værdien ikke findes i listen */}
-              {item.afdeling && !afdelinger.includes(item.afdeling) && (
-                <option value={item.afdeling}>{item.afdeling}</option>
-              )}
-            </select>
-          </label>
+                {/* fallback hvis værdien ikke findes i listen */}
+                {item.afdeling && !afdelinger.includes(item.afdeling) && (
+                  <option value={item.afdeling}>{item.afdeling}</option>
+                )}
+              </select>
+            </label>
+          </div>
 
-          <div
-            className="modal-actions"
-            style={{ display: "flex", gap: "10px", marginTop: "20px" }}
-          >
+          <div className="modal-actions">
             <button
               type="button"
               onClick={handleDelete}
