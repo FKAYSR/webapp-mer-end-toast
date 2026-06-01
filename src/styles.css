@@ -473,3 +473,7 @@ main h3 {
 .detail-ingredients {
   list-style: none;
 }
+
+.detail-ingredienser-section {
+  background-color: var(--container-big-color);
+}
