@@ -12,11 +12,19 @@ export default function ProductCard({
   const navigate = useNavigate();
 
   return (
-    <article className={cardClassName}
-    onClick={() => navigate(`/opskrift?id=${id}`)}>
+    <article
+      className={cardClassName}
+      onClick={() => navigate(`/opskrift/${id}`)}
+    >
       {image && (
         <div className="product-card-image-wrapper">
-          <img className="product-card-image" src={image} alt={title ?? ""} loading="lazy" decoding="async"/>
+          <img
+            className="product-card-image"
+            src={image}
+            alt={title ?? ""}
+            loading="lazy"
+            decoding="async"
+          />
         </div>
       )}
 
@@ -29,7 +37,8 @@ export default function ProductCard({
               {Number(price).toLocaleString("da-DK", {
                 minimumFractionDigits: 0,
                 maximumFractionDigits: 2,
-              })} kr
+              })}{" "}
+              kr
             </span>
           )}
 

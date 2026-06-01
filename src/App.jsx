@@ -21,7 +21,7 @@ export default function App() {
         <Route path="*" element={<NotFoundPage />} />
         <Route path="/søg" element={<SearchPage />} />
         <Route path="/allergi" element={<AllergyPage />} />
-        <Route path="/opskrift" element={<DetailPage />} />
+        <Route path="/opskrift/:id" element={<DetailPage />} />
         <Route path="/produkter" element={<ProductPage />} />
       </Routes>
       <Navbar />
