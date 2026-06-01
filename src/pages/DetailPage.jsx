@@ -4,6 +4,7 @@ import { supabase } from "../supabaseClient";
 import TimeIcon from "../assets/time-icon.svg";
 import FreezeIcon from "../assets/freeze-icon.svg";
 import RecipeToList from "../components/RecipeToList";
+import Checkbox from "../components/Checkbox";
 
 function parseIngredientsIds(value) {
   if (Array.isArray(value)) return value;  
@@ -147,7 +148,7 @@ export default function DetailPage() {
       </div>
       <h1>{recipe.navn}</h1>
       {/* Vis resten af din opskrift-data her */}
-      <section>
+      <section className="detail-ingredienser-section">
         <h2>Ingredienser</h2>
 
         {loadingIngredients && <p>Henter ingredienser...</p>}
@@ -159,10 +160,11 @@ export default function DetailPage() {
 
         {ingredients.length > 0 && (
           <>
-          <ul className="detail-ingredients">
+          <ul className="liste-punkter">
             {ingredients.map((ingredient) => (
               <li key={ingredient.id}>
                 <div>
+                  <Checkbox/>
                   <span>{ingredient.standard_mængde}</span>
                   <span>{ingredient.enhed}</span>
                   <span> {ingredient.navn}</span>
@@ -172,7 +174,7 @@ export default function DetailPage() {
           </ul>
 
           <button type="button" onClick={() => setShowModal(true)}>
-            Vælg ingredienser
+            Tilføj til indkøbslisten
           </button>
           </>
         )}
