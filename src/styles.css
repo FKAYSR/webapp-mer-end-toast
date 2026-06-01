@@ -232,6 +232,11 @@ main h3 {
   width: 100%;
 }
 
+.liste-række:has(input[type="checkbox"]:checked) .vare-tekst-klikbar {
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+
 .searchbar {
   position: fixed;
   left: 0;
@@ -412,7 +417,7 @@ main h3 {
   font-weight: var(--font-weight-bold);
 }
 
-.preference-button{
+.preference-button {
   display: flex;
   width: 6.85419rem;
   height: 6.4375rem;
