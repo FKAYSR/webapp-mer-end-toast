@@ -3,6 +3,7 @@ import { useParams } from "react-router";
 import { supabase } from "../supabaseClient";
 import TimeIcon from "../assets/time-icon.svg";
 import FreezeIcon from "../assets/freeze-icon.svg";
+import RecipeToList from "../components/RecipeToList";
 
 function parseIngredientsIds(value) {
   if (Array.isArray(value)) return value;  
@@ -24,7 +25,8 @@ export default function DetailPage() {
   const [ingredients, setIngredients] = useState([]);
   const [loadingIngredients, setLoadingIngredients] = useState(false);
   const [ingredientsError, setIngredientsError] = useState(null);
-  const [addingToList, setAddingToList] = useState(false);
+  // const [addingToList, setAddingToList] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     async function fetchRecipe() {
@@ -59,67 +61,68 @@ export default function DetailPage() {
       setLoadingIngredients(true);
       setIngredientsError(null);
 
-      if (!ingredientsIds.length) {
+      if (ingredientsIds.length === 0) {
         setIngredients([]);
         setLoadingIngredients(false);
         return;
       }
-
-      try {
-
-      console.log("recipe:", recipe);
-        console.log("ingredientsIds:", ingredientsIds);
 
       const { data, error } = await supabase
       .from("ingredienser")
       .select("id, navn, standard_mængde, enhed, pris, afdeling, added_to_list")
       .in("id", ingredientsIds);
 
-      if (error) throw error;
-
-      const orderedIngredients = (data ?? []).sort(
-        (a, b) => ingredientsIds.indexOf(a.id) - ingredientsIds.indexOf(b.id)
-       );
-
-      setIngredients(orderedIngredients);
-      } catch (error) {
-        console.error("Der skete en fejl under indlæsning af ingredienser", error.message,);
+      if (error) {
+        console.error(error.message);
         setIngredientsError(error);
-      } finally {
         setLoadingIngredients(false);
+        return;
       }
+
+      setIngredients(data || []);
+      setLoadingIngredients(false);
     }
 
     fetchIngredients();
   }, [recipe]);
 
-  const handleAddAllToShoppingList = async () => {
-    const ingredientsIds = ingredients.map((ingredient) => ingredient.id);
+  function handleAdded(selectedIds) {
+    const updated = ingredients.map((item) => {
+      if (selectedIds.includes(item.id)) {
+        return { ...item, added_to_list: true };
+      }
+      return item;
+    });
+    setIngredients(updated);
+  }
+//#region 
+  // const handleAddAllToShoppingList = async () => {
+  //   const ingredientsIds = ingredients.map((ingredient) => ingredient.id);
 
-    if (!ingredientsIds.length) return;
+  //   if (!ingredientsIds.length) return;
 
-    setAddingToList(true);
+  //   setAddingToList(true);
 
-    const {error} = await supabase
-    .from("ingredienser")
-    .update({ added_to_list: true })
-    .in("id", ingredientsIds);
+  //   const {error} = await supabase
+  //   .from("ingredienser")
+  //   .update({ added_to_list: true })
+  //   .in("id", ingredientsIds);
 
-    if (error) {
-      console.error("Der skete en fejl under tilføjelse til indkøbslisten:", error.message);
-      setAddingToList(false);
-      return;
-    }
+  //   if (error) {
+  //     console.error("Der skete en fejl under tilføjelse til indkøbslisten:", error.message);
+  //     setAddingToList(false);
+  //     return;
+  //   }
 
-    setIngredients((currentIngredients) =>
-    currentIngredients.map((ingredient) => ({
-      ...ingredient, added_to_list: true,
-    })),
-  );
+  //   setIngredients((currentIngredients) =>
+  //   currentIngredients.map((ingredient) => ({
+  //     ...ingredient, added_to_list: true,
+  //   })),
+  // );
 
-  setAddingToList(false);
-  };
-
+  // setAddingToList(false);
+  // };
+//#endregion
 
   if (!recipe) return <p>Henter den lækre opskrift...</p>;
 
@@ -168,13 +171,18 @@ export default function DetailPage() {
             ))}
           </ul>
 
-          <button type="button" onClick={handleAddAllToShoppingList}
-          disabled={addingToList}>
-            {addingToList ? "Tilføjer..." : "Tilføj alle til indkøbslisten"}
+          <button type="button" onClick={() => setShowModal(true)}>
+            Vælg ingredienser
           </button>
           </>
         )}
       </section>
+
+      <RecipeToList
+      isOpen={showModal}
+      ingredients={ingredients}
+      onClose={() => setShowModal(false)}
+      onAdded={handleAdded}/>
     </div>
   );
 }
