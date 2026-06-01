@@ -469,3 +469,7 @@ main h3 {
   padding: 0;
   margin: 0;
 }
+
+.detail-ingredients {
+  list-style: none;
+}
