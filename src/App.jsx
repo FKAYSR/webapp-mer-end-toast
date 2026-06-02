@@ -15,7 +15,7 @@ export default function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Onboarding/>}/>
+        <Route path="/" element={<Onboarding/>} />
         <Route path="/hjem" element={<HomePage />} />
         <Route path="/indkøbsliste" element={<ShoppinglistPage />} />
         <Route path="/gemte" element={<SavedPage />} />
