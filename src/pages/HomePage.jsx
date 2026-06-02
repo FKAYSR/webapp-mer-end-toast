@@ -7,24 +7,42 @@ import { useEffect, useState } from "react";
 
 export default function HomePage() {
   const [recipes, setRecipes] = useState([]);
+  const [allergyIds, setAllergyIds] = useState([]);
 
-    useEffect(() => {
-      const loadRecipes = async () => {
-        const { data, error } = await supabase
-          .from("opskrifter")
-          .select("id, navn, pris_portion, tid, billede, ingredienser_ids");
-  
-      if (error) {
-        console.error("Supabase error:", error);
+  useEffect(() => {
+    const loadRecipes = async () => {
+      const { data: recipeData, error: recipeError } = await supabase
+        .from("opskrifter")
+        .select("id, navn, pris_portion, tid, billede, ingredienser_ids");
+
+      if (recipeError) {
+        console.error("Supabase error (opskrifter):", recipeError);
         return;
       }
-  
-      setRecipes(data ?? []);
-      };
-  
-      loadRecipes();
-    }, [])
 
+      const { data: allergyData, error: allergyError } = await supabase
+        .from("ingredienser")
+        .select("id")
+        .eq("allergisk", true);
+
+      if (allergyError) {
+        console.error("Supabase error (ingredienser):", allergyError);
+        return;
+      }
+
+      const ids = allergyData ? allergyData.map((ing) => ing.id) : [];
+
+      setRecipes(recipeData ?? []);
+      setAllergyIds(ids);
+    };
+
+    loadRecipes();
+  }, []);
+
+  const checkAllergy = (recipeIngredients) => {
+    if (!recipeIngredients || !Array.isArray(recipeIngredients)) return false;
+    return recipeIngredients.some((id) => allergyIds.includes(id));
+  };
   return (
     <>
       <header>
@@ -39,6 +57,7 @@ export default function HomePage() {
           />
           <p className="home-text">Mer' end Toast</p>
         </article>
+
         <ProductGrid title="Mest populære" variant="horizontal">
           {recipes.map((recipe) => (
             <ProductCard
@@ -49,9 +68,11 @@ export default function HomePage() {
               price={recipe.pris_portion}
               time={recipe.tid}
               image={recipe.billede}
+              hasAllergy={checkAllergy(recipe.ingredienser_ids)} // <-- RETTELSE: Nu kalder vi funktionen!
             />
           ))}
         </ProductGrid>
+
         <ProductGrid title="Hurtigt og billigt" variant="horizontal">
           {recipes.map((recipe) => (
             <ProductCard
@@ -62,9 +83,11 @@ export default function HomePage() {
               price={recipe.pris_portion}
               time={recipe.tid}
               image={recipe.billede}
+              hasAllergy={checkAllergy(recipe.ingredienser_ids)} // <-- RETTELSE: Og her!
             />
           ))}
         </ProductGrid>
+
         <ProductGrid title="Smagen af sommer" variant="horizontal">
           {recipes.map((recipe) => (
             <ProductCard
@@ -75,9 +98,11 @@ export default function HomePage() {
               price={recipe.pris_portion}
               time={recipe.tid}
               image={recipe.billede}
+              hasAllergy={checkAllergy(recipe.ingredienser_ids)} // <-- RETTELSE: Og her!
             />
           ))}
         </ProductGrid>
+
         <ProductGrid title="Blandet" variant="vertical">
           {recipes.map((recipe) => (
             <ProductCard
@@ -88,6 +113,7 @@ export default function HomePage() {
               price={recipe.pris_portion}
               time={recipe.tid}
               image={recipe.billede}
+              hasAllergy={checkAllergy(recipe.ingredienser_ids)} // <-- RETTELSE: Og til sidst på det store kort!
             />
           ))}
         </ProductGrid>

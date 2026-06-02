@@ -477,3 +477,13 @@ main h3 {
 .detail-ingredienser-section {
   background-color: var(--container-big-color);
 }
+
+.product-card-image-wrapper {
+  position: relative;
+}
+
+.product-card-allergy-icon {
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0.5rem;
+}

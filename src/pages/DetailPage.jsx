@@ -7,7 +7,7 @@ import RecipeToList from "../components/RecipeToList";
 import Checkbox from "../components/Checkbox";
 
 function parseIngredientsIds(value) {
-  if (Array.isArray(value)) return value;  
+  if (Array.isArray(value)) return value;
   if (typeof value === "string") {
     try {
       return JSON.parse(value);
@@ -19,7 +19,6 @@ function parseIngredientsIds(value) {
 }
 
 export default function DetailPage() {
-  // useParams snupper automatisk værdien fra ':id' i din App.jsx rute
   const { id } = useParams();
 
   const [recipe, setRecipe] = useState(null);
@@ -52,7 +51,7 @@ export default function DetailPage() {
     fetchRecipe();
   }, [id]); // Genkør hvis ID'et i URL'en ændrer sig
 
-  useEffect(()  => {
+  useEffect(() => {
     async function fetchIngredients() {
       if (!recipe) return;
 
@@ -68,12 +67,17 @@ export default function DetailPage() {
       }
 
       const { data, error } = await supabase
-      .from("ingredienser")
-      .select("id, navn, standard_mængde, enhed, pris, afdeling, added_to_list")
-      .in("id", ingredientsIds);
+        .from("ingredienser")
+        .select(
+          "id, navn, standard_mængde, enhed, pris, afdeling, added_to_list",
+        )
+        .in("id", ingredientsIds);
 
       if (error) {
-        console.error("Der skete en fejl under indlæsning af ingredienserne", error.message);
+        console.error(
+          "Der skete en fejl under indlæsning af ingredienserne",
+          error.message,
+        );
         setIngredientsError(error);
         setLoadingIngredients(false);
         return;
@@ -131,31 +135,32 @@ export default function DetailPage() {
 
         {ingredients.length > 0 && (
           <>
-          <ul className="liste-punkter">
-            {ingredients.map((ingredient) => (
-              <li key={ingredient.id}>
-                <div>
-                  <Checkbox/>
-                  <span>{ingredient.standard_mængde}</span>
-                  <span>{ingredient.enhed}</span>
-                  <span> {ingredient.navn}</span>
-                </div>
-              </li>
-            ))}
-          </ul>
+            <ul className="liste-punkter">
+              {ingredients.map((ingredient) => (
+                <li key={ingredient.id}>
+                  <div>
+                    <Checkbox />
+                    <span>{ingredient.standard_mængde}</span>
+                    <span>{ingredient.enhed}</span>
+                    <span> {ingredient.navn}</span>
+                  </div>
+                </li>
+              ))}
+            </ul>
 
-          <button type="button" onClick={() => setShowModal(true)}>
-            Tilføj til indkøbslisten
-          </button>
+            <button type="button" onClick={() => setShowModal(true)}>
+              Tilføj til indkøbslisten
+            </button>
           </>
         )}
       </section>
 
       <RecipeToList
-      isOpen={showModal}
-      ingredients={ingredients}
-      onClose={() => setShowModal(false)}
-      onAdded={handleAdded}/>
+        isOpen={showModal}
+        ingredients={ingredients}
+        onClose={() => setShowModal(false)}
+        onAdded={handleAdded}
+      />
     </div>
   );
 }
