@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { supabase } from "../supabaseClient";
-import TimeIcon from "../assets/time-icon.svg";
-import FreezeIcon from "../assets/freeze-icon.svg";
+import TimeIcon from "../assets/ikoner/time-active-icon.svg";
+import FreezeIcon from "../assets/ikoner/freeze-icon.svg";
 import RecipeToList from "../components/RecipeToList";
 import Checkbox from "../components/Checkbox";
 
