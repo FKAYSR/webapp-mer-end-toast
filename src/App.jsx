@@ -9,12 +9,14 @@ import SearchPage from "./pages/SearchPage";
 import AllergyPage from "./pages/AllergyPage";
 import DetailPage from "./pages/DetailPage";
 import ProductPage from "./pages/ProductPage";
+import Onboarding from "./pages/OnboardingPage";
 
 export default function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<Onboarding/>}/>
+        <Route path="/hjem" element={<HomePage />} />
         <Route path="/indkøbsliste" element={<ShoppinglistPage />} />
         <Route path="/gemte" element={<SavedPage />} />
         <Route path="/profil" element={<ProfilePage />} />
