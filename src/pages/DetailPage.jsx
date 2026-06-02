@@ -26,7 +26,6 @@ export default function DetailPage() {
   const [ingredients, setIngredients] = useState([]);
   const [loadingIngredients, setLoadingIngredients] = useState(false);
   const [ingredientsError, setIngredientsError] = useState(null);
-  // const [addingToList, setAddingToList] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
@@ -34,7 +33,7 @@ export default function DetailPage() {
       if (!id) return;
 
       const { data, error } = await supabase
-        .from("opskrifter") // Tjek dit præcise tabelnavn i Supabase
+        .from("opskrifter")
         .select("*")
         // Gør så den kun henter informationen fra id'et i URL'en
         .eq("id", id)
@@ -47,7 +46,7 @@ export default function DetailPage() {
         );
         return; // Stop funktionen her, så vi ikke prøver at gemme tom data
       }
-      // Hvis Supabase finder opskriften, gemmer vi hele objektet i vores state (recipe). Det får React til at genindlæse siden.
+      // Hvis Supabase finder opskriften, gemmer vi hele objektet i vores state (recipe). Det får REACT til at genindlæse siden.
       if (data) setRecipe(data);
     }
     fetchRecipe();
@@ -74,7 +73,7 @@ export default function DetailPage() {
       .in("id", ingredientsIds);
 
       if (error) {
-        console.error(error.message);
+        console.error("Der skete en fejl under indlæsning af ingredienserne", error.message);
         setIngredientsError(error);
         setLoadingIngredients(false);
         return;
@@ -96,34 +95,6 @@ export default function DetailPage() {
     });
     setIngredients(updated);
   }
-//#region 
-  // const handleAddAllToShoppingList = async () => {
-  //   const ingredientsIds = ingredients.map((ingredient) => ingredient.id);
-
-  //   if (!ingredientsIds.length) return;
-
-  //   setAddingToList(true);
-
-  //   const {error} = await supabase
-  //   .from("ingredienser")
-  //   .update({ added_to_list: true })
-  //   .in("id", ingredientsIds);
-
-  //   if (error) {
-  //     console.error("Der skete en fejl under tilføjelse til indkøbslisten:", error.message);
-  //     setAddingToList(false);
-  //     return;
-  //   }
-
-  //   setIngredients((currentIngredients) =>
-  //   currentIngredients.map((ingredient) => ({
-  //     ...ingredient, added_to_list: true,
-  //   })),
-  // );
-
-  // setAddingToList(false);
-  // };
-//#endregion
 
   if (!recipe) return <p>Henter den lækre opskrift...</p>;
 
@@ -147,7 +118,7 @@ export default function DetailPage() {
         )}
       </div>
       <h1>{recipe.navn}</h1>
-      {/* Vis resten af din opskrift-data her */}
+
       <section className="detail-ingredienser-section">
         <h2>Ingredienser</h2>
 

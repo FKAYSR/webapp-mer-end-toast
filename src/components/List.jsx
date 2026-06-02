@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Checkbox from "./Checkbox";
 import EditModal from "./EditModal";
 import { supabase } from "../supabaseClient";
@@ -12,7 +12,8 @@ export default function List({ table = "ingredienser", showPrice = true }) {
   const [selectedItem, setSelectedItem] = useState(null);
 
   // <-- 3. JETTE-FUNKTION (Flyttet ud af useEffect, så EditModal kan kalde den)
-  const fetchItems = async () => {
+  // useCallback - React-hook, husker en funktion så REACT ikke behøver lave en ny version ved hver rendering
+  const fetchItems = useCallback(async () => {
     try {
       setLoading(true);
       const { data, error } = await supabase
@@ -31,11 +32,25 @@ export default function List({ table = "ingredienser", showPrice = true }) {
     } finally {
       setLoading(false);
     }
-  };
+  }, [table]);
 
   useEffect(() => {
-    fetchItems();
-  }, [table]);
+    const timeoutId = setTimeout(() => {
+      fetchItems();
+    }, 0);
+
+    const handleRefresh = () => {
+      fetchItems();
+    };
+
+    // lytter til eventet der blev sendt ud fra RecipeToList.jsx
+    window.addEventListener("shoppinglist-updated", handleRefresh);
+
+    return () => {
+      clearTimeout(timeoutId);
+      window.removeEventListener("shoppinglist-updated", handleRefresh);
+    };
+  }, [fetchItems]);
 
   const groupedItems = items.reduce((groups, item) => {
     const afdeling = item.afdeling ?? "Ukendt afdeling";

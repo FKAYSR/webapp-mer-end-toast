@@ -1,54 +1,68 @@
+import { useState } from "react";
 import { supabase } from "../supabaseClient";
-import { useEffect, useState } from "react";
 import Checkbox from "./Checkbox";
 
 export default function RecipeToList({ isOpen, ingredients, onClose, onAdded }) {
-  const [selectedIds, setSelectedIds] = useState([]);
+  const [selectedIds, setSelectedIds] = useState(() =>
+    ingredients.map((item) => Number(item.id)),
+  );
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    if (!isOpen) return;
-
-    const defaultSelected = ingredients
-      .filter((item) => item.added_to_list !== true)
-      .map((item) => item.id);
-
-    setSelectedIds(defaultSelected);
-  }, [isOpen, ingredients]);
+  if (!isOpen) return null;
 
   function toggleId(id) {
-    if (selectedIds.includes(id)) {
-      setSelectedIds(selectedIds.filter((x) => x !== id));
+    const idNumber = Number(id);
+
+    if (selectedIds.includes(idNumber)) {
+      setSelectedIds(selectedIds.filter((x) => x !== idNumber));
     } else {
-      setSelectedIds([...selectedIds, id]);
+      setSelectedIds([...selectedIds, idNumber]);
     }
   }
 
   async function handleSave() {
-    if (selectedIds.length === 0) {
+    const idsToAdd = ingredients
+      .filter((item) => !selectedIds.includes(Number(item.id)))
+      .map((item) => Number(item.id));
+
+    if (idsToAdd.length === 0) {
       onClose();
       return;
     }
 
     setLoading(true);
 
-    const { error } = await supabase
-      .from("ingredienser")
-      .update({ added_to_list: true })
-      .in("id", selectedIds);
+    for (const id of idsToAdd) {
+      const { data: currentItem, error: fetchError } = await supabase
+        .from("ingredienser")
+        .select("standard_mængde")
+        .eq("id", id)
+        .single();
 
-    setLoading(false);
+      if (fetchError) {
+        console.error(fetchError.message);
+        continue;
+      }
 
-    if (error) {
-      console.error(error.message);
-      return;
+      const currentAmount = Number(currentItem.standard_mængde || 0);
+      const newAmount = currentAmount + 1;
+
+      const { error: updateError } = await supabase
+        .from("ingredienser")
+        .update({ standard_mængde: newAmount, added_to_list: true })
+        .eq("id", id);
+
+      if (updateError) {
+        console.error(updateError.message);
+      }
     }
 
-    onAdded(selectedIds);
+    setLoading(false);
+    onAdded(idsToAdd);
+    // Sender et event ud
+    window.dispatchEvent(new Event("shoppinglist-updated"));
     onClose();
   }
-
-  if (!isOpen) return null;
 
   return (
     <div className="modal-backdrop">
@@ -58,8 +72,9 @@ export default function RecipeToList({ isOpen, ingredients, onClose, onAdded }) 
         {ingredients.map((item) => (
           <label key={item.id} className="modal-row">
             <Checkbox
-            defaultChecked={selectedIds.includes(Number(item.id))}
-            onChange={() => toggleId(item.id)}/>
+              checked={selectedIds.includes(Number(item.id))}
+              onChange={() => toggleId(item.id)}
+            />
             <span>
               {item.navn} {item.added_to_list ? "(allerede på listen)" : ""}
             </span>
@@ -68,7 +83,7 @@ export default function RecipeToList({ isOpen, ingredients, onClose, onAdded }) 
 
         <div className="modal-actions">
           <button type="button" onClick={handleSave} disabled={loading}>
-            {loading ? "Gemmer..." : "Tilføj valgte"}
+            {loading ? "Gemmer..." : "Tilføj til indkøbsliste"}
           </button>
           <button type="button" onClick={onClose} disabled={loading}>
             Annuller
