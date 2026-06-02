@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { supabase } from "../supabaseClient";
-import TimeIcon from "../assets/time-icon.svg";
-import FreezeIcon from "../assets/freeze-icon.svg";
+import TimeIcon from "../assets/ikoner/time-active-icon.svg";
+import FreezeIcon from "../assets/ikoner/freeze-icon.svg";
 import RecipeToList from "../components/RecipeToList";
 import Checkbox from "../components/Checkbox";
+import AddIcon from "../assets/ikoner/add-to-shoppinglist-icon.svg";
 
 function parseIngredientsIds(value) {
   if (Array.isArray(value)) return value;  
@@ -144,7 +145,8 @@ export default function DetailPage() {
             ))}
           </ul>
 
-          <button type="button" onClick={() => setShowModal(true)}>
+          <button type="button" className="add-to-list-button" onClick={() => setShowModal(true)}>
+            <img src={AddIcon} alt="" />
             Tilføj til indkøbslisten
           </button>
           </>

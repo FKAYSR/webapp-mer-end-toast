@@ -1,5 +1,5 @@
 import { useRef, useEffect, useState } from "react";
-import CloseButton from "../assets/close-icon-large.svg";
+import CloseButton from "../assets/ikoner/close-icon-large.svg";
 import { supabase } from "../supabaseClient.js";
 
 export default function IngredientToList({ isOpen, onClose }) {

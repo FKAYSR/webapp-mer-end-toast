@@ -1,5 +1,5 @@
 import { useState } from "react";
-import PlusButton from "../assets/addButton.svg";
+import PlusButton from "../assets/ikoner/addButton.svg";
 import IngredientToList from "./IngredientToList";
 
 export default function AddButton() {
