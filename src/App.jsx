@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router";
+import { Routes, Route, useLocation } from "react-router";
 import Navbar from "./components/Navbar";
 import HomePage from "./pages/HomePage";
 import SavedPage from "./pages/SavedPage";
@@ -9,12 +9,16 @@ import SearchPage from "./pages/SearchPage";
 import AllergyPage from "./pages/AllergyPage";
 import DetailPage from "./pages/DetailPage";
 import ProductPage from "./pages/ProductPage";
+import Onboarding from "./pages/OnboardingPage";
 
 export default function App() {
+  const location = useLocation();
+
   return (
     <>
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<Onboarding/>} />
+        <Route path="/hjem" element={<HomePage />} />
         <Route path="/indkøbsliste" element={<ShoppinglistPage />} />
         <Route path="/gemte" element={<SavedPage />} />
         <Route path="/profil" element={<ProfilePage />} />
@@ -24,7 +28,7 @@ export default function App() {
         <Route path="/opskrift/:id" element={<DetailPage />} />
         <Route path="/produkter" element={<ProductPage />} />
       </Routes>
-      <Navbar />
+      {location.pathname !== "/" && <Navbar />}
     </>
   );
 }

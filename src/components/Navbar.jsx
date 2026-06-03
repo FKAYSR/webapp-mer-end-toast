@@ -13,7 +13,7 @@ export default function Navbar() {
   return (
     <nav>
       <NavLink
-        to="/"
+        to="hjem"
         className={({ isActive }) =>
           isActive ? "nav-link active" : "nav-link"
         }

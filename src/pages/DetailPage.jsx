@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { supabase } from "../supabaseClient";
-import TimeIcon from "../assets/time-icon.svg";
-import FreezeIcon from "../assets/freeze-icon.svg";
+import TimeIcon from "../assets/ikoner/time-active-icon.svg";
+import FreezeIcon from "../assets/ikoner/freeze-icon.svg";
 import RecipeToList from "../components/RecipeToList";
 import Checkbox from "../components/Checkbox";
+import AddIcon from "../assets/ikoner/add-to-shoppinglist-icon.svg";
 
 function parseIngredientsIds(value) {
   if (Array.isArray(value)) return value;
@@ -26,6 +27,7 @@ export default function DetailPage() {
   const [loadingIngredients, setLoadingIngredients] = useState(false);
   const [ingredientsError, setIngredientsError] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const [toastSuccess, setToastSuccess] = useState("");
 
   useEffect(() => {
     async function fetchRecipe() {
@@ -90,6 +92,20 @@ export default function DetailPage() {
     fetchIngredients();
   }, [recipe]);
 
+    useEffect(() => {
+      if (!toastSuccess) return;
+
+      function handleClick() {
+        setToastSuccess("");
+      }
+
+      window.addEventListener("click", handleClick);
+
+      return () => {
+        window.removeEventListener("click", handleClick);
+      };
+    }, [toastSuccess]);
+
   function handleAdded(selectedIds) {
     const updated = ingredients.map((item) => {
       if (selectedIds.includes(item.id)) {
@@ -104,6 +120,13 @@ export default function DetailPage() {
 
   return (
     <div className="detail-page">
+
+      {toastSuccess && (
+        <div className="toast-detailpage" onClick={() => setToastSuccess("")}>
+          {toastSuccess}
+        </div>
+      )}
+
       <div className="top-tag-container">
         <div className="small-tag">
           <div>
@@ -148,7 +171,12 @@ export default function DetailPage() {
               ))}
             </ul>
 
-            <button type="button" onClick={() => setShowModal(true)}>
+            <button
+              type="button"
+              className="add-to-list-button"
+              onClick={() => setShowModal(true)}
+            >
+              <img src={AddIcon} alt="" />
               Tilføj til indkøbslisten
             </button>
           </>
@@ -160,6 +188,7 @@ export default function DetailPage() {
         ingredients={ingredients}
         onClose={() => setShowModal(false)}
         onAdded={handleAdded}
+        showToast={setToastSuccess}
       />
     </div>
   );

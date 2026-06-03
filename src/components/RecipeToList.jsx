@@ -2,7 +2,7 @@ import { useState } from "react";
 import { supabase } from "../supabaseClient";
 import Checkbox from "./Checkbox";
 
-export default function RecipeToList({ isOpen, ingredients, onClose, onAdded }) {
+export default function RecipeToList({ isOpen, ingredients, onClose, onAdded, showToast }) {
   const [selectedIds, setSelectedIds] = useState(() =>
     ingredients.map((item) => Number(item.id)),
   );
@@ -58,6 +58,8 @@ export default function RecipeToList({ isOpen, ingredients, onClose, onAdded }) 
     }
 
     setLoading(false);
+    showToast("Ingredienser tilføjet til indkøbslisten!");
+
     onAdded(idsToAdd);
     // Sender et event ud
     window.dispatchEvent(new Event("shoppinglist-updated"));
@@ -65,9 +67,12 @@ export default function RecipeToList({ isOpen, ingredients, onClose, onAdded }) 
   }
 
   return (
-    <div className="modal-backdrop">
-      <div className="modal">
-        <h3>Markér de ting du allerede har og resten bliver tilføjet til din indkøbsliste!</h3>
+    <div className="recipe-modal-backdrop" onClick={onClose}>
+      <div className="recipe-modal" onClick={(e) => e.stopPropagation()}>
+        <h3>
+          Markér de ting du allerede har og resten bliver tilføjet til din
+          indkøbsliste!
+        </h3>
 
         {ingredients.map((item) => (
           <label key={item.id} className="modal-row">
