@@ -21,7 +21,7 @@ export default function HomePage() {
   }, []);
 
   return (
-    <>
+    <div className="home-page">
       <header>
         <SearchEntry />
       </header>
@@ -95,6 +95,6 @@ export default function HomePage() {
           ))}
         </ProductGrid>
       </main>
-    </>
+    </div>
   );
 }

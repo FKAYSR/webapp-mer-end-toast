@@ -44,7 +44,7 @@ export default function AllergyPage() {
   };
 
   return (
-    <>
+    <div className="allergy-page">
       <header>
         <h1>Mine allergier</h1>
       </header>
@@ -52,11 +52,8 @@ export default function AllergyPage() {
         {/* RETTELSE: Fjernet <div> inde fra <p> for at lave gyldig HTML */}
         <p>
           Hvis dine valgte ingredienser indgår i en opskrift, vil du få vist en
-          lille advarsel
+          lille advarsel <img src={AllergyIcon} alt="allergiadvarsel" />
         </p>
-        <div>
-          <img src={AllergyIcon} alt="allergiadvarsel" />
-        </div>
 
         <div className="active-allergy-container">
           {allergicIngredients.map((ing) => (
@@ -73,10 +70,6 @@ export default function AllergyPage() {
           ))}
         </div>
 
-        <button onClick={() => setIsModalOpen(true)}>
-          <img src={AddButton} alt="tilføj ny ingrediens, du ikke tåler" />
-        </button>
-
         {isModalOpen && (
           <AddAllergyModal
             onClose={() => {
@@ -86,6 +79,10 @@ export default function AllergyPage() {
           />
         )}
       </main>
-    </>
+
+      <button onClick={() => setIsModalOpen(true)} className="add-btn">
+        <img src={AddButton} alt="tilføj ny ingrediens, du ikke tåler" />
+      </button>
+    </div>
   );
 }
