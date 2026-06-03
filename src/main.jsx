@@ -4,9 +4,11 @@ import { BrowserRouter } from "react-router";
 import "./styles.css";
 import App from "./App.jsx";
 
+const baseName = import.meta.env.DEV ? "/" : "/webapp-mer-end-toast";
+
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <BrowserRouter basename={import.meta.env.BASE_URL}>
+    <BrowserRouter basename={baseName}>
       <App />
     </BrowserRouter>
   </StrictMode>
