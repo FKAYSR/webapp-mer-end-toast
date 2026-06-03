@@ -28,6 +28,7 @@ export default function DetailPage() {
   const [loadingIngredients, setLoadingIngredients] = useState(false);
   const [ingredientsError, setIngredientsError] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const [toastSuccess, setToastSuccess] = useState("");
 
   useEffect(() => {
     async function fetchRecipe() {
@@ -87,6 +88,20 @@ export default function DetailPage() {
     fetchIngredients();
   }, [recipe]);
 
+    useEffect(() => {
+      if (!toastSuccess) return;
+
+      function handleClick() {
+        setToastSuccess("");
+      }
+
+      window.addEventListener("click", handleClick);
+
+      return () => {
+        window.removeEventListener("click", handleClick);
+      };
+    }, [toastSuccess]);
+
   function handleAdded(selectedIds) {
     const updated = ingredients.map((item) => {
       if (selectedIds.includes(item.id)) {
@@ -101,6 +116,13 @@ export default function DetailPage() {
 
   return (
     <div className="detail-page">
+
+      {toastSuccess && (
+        <div className="toast-detailpage" onClick={() => setToastSuccess("")}>
+          {toastSuccess}
+        </div>
+      )}
+
       <div className="top-tag-container">
         <div className="small-tag">
           <div>
@@ -132,32 +154,38 @@ export default function DetailPage() {
 
         {ingredients.length > 0 && (
           <>
-          <ul className="liste-punkter">
-            {ingredients.map((ingredient) => (
-              <li key={ingredient.id}>
-                <div>
-                  <Checkbox/>
-                  <span>{ingredient.standard_mængde}</span>
-                  <span>{ingredient.enhed}</span>
-                  <span> {ingredient.navn}</span>
-                </div>
-              </li>
-            ))}
-          </ul>
+            <ul className="liste-punkter">
+              {ingredients.map((ingredient) => (
+                <li key={ingredient.id}>
+                  <div>
+                    <Checkbox />
+                    <span>{ingredient.standard_mængde}</span>
+                    <span>{ingredient.enhed}</span>
+                    <span> {ingredient.navn}</span>
+                  </div>
+                </li>
+              ))}
+            </ul>
 
-          <button type="button" className="add-to-list-button" onClick={() => setShowModal(true)}>
-            <img src={AddIcon} alt="" />
-            Tilføj til indkøbslisten
-          </button>
+            <button
+              type="button"
+              className="add-to-list-button"
+              onClick={() => setShowModal(true)}
+            >
+              <img src={AddIcon} alt="" />
+              Tilføj til indkøbslisten
+            </button>
           </>
         )}
       </section>
 
       <RecipeToList
-      isOpen={showModal}
-      ingredients={ingredients}
-      onClose={() => setShowModal(false)}
-      onAdded={handleAdded}/>
+        isOpen={showModal}
+        ingredients={ingredients}
+        onClose={() => setShowModal(false)}
+        onAdded={handleAdded}
+        showToast={setToastSuccess}
+      />
     </div>
   );
 }
