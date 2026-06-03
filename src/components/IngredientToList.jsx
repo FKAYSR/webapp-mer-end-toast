@@ -164,7 +164,9 @@ export default function IngredientToList({ isOpen, onClose }) {
             <button type="button" className="anuller-knap" onClick={onClose}>
               Annuller
             </button>
-            <button type="submit">Gem</button>
+            <button type="submit" className="gem-knap">
+              Gem
+            </button>
           </div>
         </form>
       </div>

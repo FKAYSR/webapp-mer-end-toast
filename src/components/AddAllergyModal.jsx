@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { supabase } from "../supabaseClient";
+import CloseButton from "../assets/ikoner/close-icon-large.svg";
 
 export default function AddAllergyModal({ onClose }) {
   const [allIngredients, setAllIngredients] = useState([]);
@@ -51,15 +52,16 @@ export default function AddAllergyModal({ onClose }) {
     <dialog ref={dialogRef} onClose={onClose} className="allergi-modal">
       <div className="modal-content">
         <div className="modal-header">
-          <h2>Søg efter ingrediens</h2>
+          <h3>Søg efter ingrediens</h3>
           <button onClick={onClose} className="luk-modal-knap">
-            ✕
+            <img src={CloseButton} alt="close modal" />
           </button>
         </div>
 
         <input
           type="text"
           placeholder="Skriv for at søge..."
+          value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           className="søgefelt"
         />
