@@ -7,42 +7,19 @@ import { useEffect, useState } from "react";
 
 export default function HomePage() {
   const [recipes, setRecipes] = useState([]);
-  const [allergyIds, setAllergyIds] = useState([]);
 
   useEffect(() => {
     const loadRecipes = async () => {
-      const { data: recipeData, error: recipeError } = await supabase
+      const { data, error } = await supabase
         .from("opskrifter")
-        .select("id, navn, pris_portion, tid, billede, ingredienser_ids");
+        .select("id, navn, pris_portion, tid, billede, ingredienser_ids"); // Vi henter bare JSON-feltet
 
-      if (recipeError) {
-        console.error("Supabase error (opskrifter):", recipeError);
-        return;
-      }
-
-      const { data: allergyData, error: allergyError } = await supabase
-        .from("ingredienser")
-        .select("id")
-        .eq("allergisk", true);
-
-      if (allergyError) {
-        console.error("Supabase error (ingredienser):", allergyError);
-        return;
-      }
-
-      const ids = allergyData ? allergyData.map((ing) => ing.id) : [];
-
-      setRecipes(recipeData ?? []);
-      setAllergyIds(ids);
+      if (error) console.error("Supabase error:", error);
+      else setRecipes(data ?? []);
     };
-
     loadRecipes();
   }, []);
 
-  const checkAllergy = (recipeIngredients) => {
-    if (!recipeIngredients || !Array.isArray(recipeIngredients)) return false;
-    return recipeIngredients.some((id) => allergyIds.includes(id));
-  };
   return (
     <>
       <header>
@@ -68,12 +45,12 @@ export default function HomePage() {
               price={recipe.pris_portion}
               time={recipe.tid}
               image={recipe.billede}
-              hasAllergy={checkAllergy(recipe.ingredienser_ids)} // <-- RETTELSE: Nu kalder vi funktionen!
+              ingredients={recipe.ingredienser_ids} // <-- Du sender bare JSON-dataen råt med her!
             />
           ))}
         </ProductGrid>
 
-        <ProductGrid title="Hurtigt og billigt" variant="horizontal">
+        <ProductGrid title="Mest populære" variant="horizontal">
           {recipes.map((recipe) => (
             <ProductCard
               key={recipe.id}
@@ -83,12 +60,12 @@ export default function HomePage() {
               price={recipe.pris_portion}
               time={recipe.tid}
               image={recipe.billede}
-              hasAllergy={checkAllergy(recipe.ingredienser_ids)} // <-- RETTELSE: Og her!
+              ingredients={recipe.ingredienser_ids} // <-- Du sender bare JSON-dataen råt med her!
             />
           ))}
         </ProductGrid>
 
-        <ProductGrid title="Smagen af sommer" variant="horizontal">
+        <ProductGrid title="Mest populære" variant="horizontal">
           {recipes.map((recipe) => (
             <ProductCard
               key={recipe.id}
@@ -98,22 +75,22 @@ export default function HomePage() {
               price={recipe.pris_portion}
               time={recipe.tid}
               image={recipe.billede}
-              hasAllergy={checkAllergy(recipe.ingredienser_ids)} // <-- RETTELSE: Og her!
+              ingredients={recipe.ingredienser_ids} // <-- Du sender bare JSON-dataen råt med her!
             />
           ))}
         </ProductGrid>
 
-        <ProductGrid title="Blandet" variant="vertical">
+        <ProductGrid title="Mest populære" variant="horizontal">
           {recipes.map((recipe) => (
             <ProductCard
               key={recipe.id}
               id={recipe.id}
-              variant="large"
+              variant="small"
               title={recipe.navn}
               price={recipe.pris_portion}
               time={recipe.tid}
               image={recipe.billede}
-              hasAllergy={checkAllergy(recipe.ingredienser_ids)} // <-- RETTELSE: Og til sidst på det store kort!
+              ingredients={recipe.ingredienser_ids} // <-- Du sender bare JSON-dataen råt med her!
             />
           ))}
         </ProductGrid>

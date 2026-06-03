@@ -142,7 +142,7 @@ main p {
 
 main img {
   display: block;
-  margin: 1rem 0;
+  /* margin: 1rem 0; */
   border-radius: 8px;
 }
 
@@ -486,4 +486,5 @@ main h3 {
   position: absolute;
   bottom: 0.5rem;
   right: 0.5rem;
+  box-shadow: var(--shadow);
 }
