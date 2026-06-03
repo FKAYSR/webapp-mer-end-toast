@@ -3,7 +3,7 @@ import { supabase } from "../supabaseClient";
 import AddAllergyModal from "../components/AddAllergyModal";
 import AllergyIcon from "../assets/ikoner/allergy-warning-icon.svg";
 import CloseIconSmall from "../assets/ikoner/close-small-icon.svg";
-import AddButton from "../assets/addButton.svg";
+import AddButton from "../assets/ikoner/addButton.svg";
 
 export default function AllergyPage() {
   const [allergicIngredients, setAllergicIngredients] = useState([]);
