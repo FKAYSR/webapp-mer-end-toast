@@ -50,7 +50,7 @@ export default function HomePage() {
           ))}
         </ProductGrid>
 
-        <ProductGrid title="Mest populære" variant="horizontal">
+        <ProductGrid title="Hurtigt og billigt" variant="horizontal">
           {recipes.map((recipe) => (
             <ProductCard
               key={recipe.id}
@@ -65,7 +65,7 @@ export default function HomePage() {
           ))}
         </ProductGrid>
 
-        <ProductGrid title="Mest populære" variant="horizontal">
+        <ProductGrid title="Smagen af sommer" variant="horizontal">
           {recipes.map((recipe) => (
             <ProductCard
               key={recipe.id}
@@ -80,12 +80,12 @@ export default function HomePage() {
           ))}
         </ProductGrid>
 
-        <ProductGrid title="Mest populære" variant="horizontal">
+        <ProductGrid title="Blandet" variant="vertical">
           {recipes.map((recipe) => (
             <ProductCard
               key={recipe.id}
               id={recipe.id}
-              variant="small"
+              variant="large"
               title={recipe.navn}
               price={recipe.pris_portion}
               time={recipe.tid}
