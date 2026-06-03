@@ -106,43 +106,67 @@ export default function IngredientToList({ isOpen, onClose }) {
   const afdelinger = [...new Set(dbIngredients.map((item) => item.afdeling))];
 
   return (
-    <dialog ref={dialogRef} onClose={onClose} className="allergi-modal">
+    <dialog
+      ref={dialogRef}
+      onClose={onClose}
+      className="ingredient-to-list-modal"
+    >
       <div className="modal-content">
-        <div className="modal-header">
-          <h2>Søg efter ingrediens</h2>
-          <button onClick={onClose} className="luk-modal-knap">
-            ✕
-          </button>
-        </div>
+        <h2>Tilføj Vare</h2>
 
-        <input
-          type="text"
-          placeholder="Skriv for at søge..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          className="søgefelt"
-        />
+        <form onSubmit={handleSubmit}>
+          <label>
+            Navn på vare:
+            <input
+              type="text"
+              name="name"
+              list="existing_ingredients"
+              value={searchInputValue}
+              onChange={handleInputChange}
+              placeholder="Søg eller tilføj ny vare"
+              required
+              autoComplete="off"
+            />
+          </label>
 
-        <div className="resultat-liste-container">
-          <ul className="resultat-liste">
-            {filteredIngredients.map((ing) => (
-              <li
-                key={ing.id}
-                onClick={() => addAllergy(ing.id)}
-                className={
-                  ing.is_allergic
-                    ? "ingrediens-punkt valgt"
-                    : "ingrediens-punkt"
-                }
-              >
-                {ing.navn} {ing.is_allergic && "⚠️"}
-              </li>
+          {/* Søgeforslag (Rettet id fra bindestreg til understreg, så det matcher inputfeltet) */}
+          <datalist id="existing_ingredients">
+            {dbIngredients.map((item, index) => (
+              <option key={index} value={item.navn} />
             ))}
-            {filteredIngredients.length === 0 && (
-              <p className="ingen-resultater">Ingen ingredienser fundet</p>
-            )}
-          </ul>
-        </div>
+          </datalist>
+
+          {/* Dropdown til afdelingskategorierne */}
+          <label>
+            Vælg varekategori
+            <select
+              name="Varekategori"
+              value={selectedCategory}
+              onChange={(e) => setSelectedCategory(e.target.value)}
+            >
+              <option value="" disabled>
+                -- Vælg Afdeling --
+              </option>
+              {afdelinger.map((cat, index) => (
+                <option key={index} value={cat}>
+                  {cat}
+                </option>
+              ))}
+
+              {/* Backup afdeling */}
+              {!afdelinger.includes("Andet") &&
+                !afdelinger.includes("andet") && (
+                  <option value="Andet">Andet</option>
+                )}
+            </select>
+          </label>
+          <div className="modal-actions">
+            <button type="button" className="anuller-knap" onClick={onClose}>
+              Annuller
+            </button>
+            <button type="submit">Gem</button>
+          </div>
+        </form>
       </div>
     </dialog>
   );

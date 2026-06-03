@@ -60,7 +60,6 @@ export default function AddAllergyModal({ onClose }) {
         <input
           type="text"
           placeholder="Skriv for at søge..."
-          value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           className="søgefelt"
         />
