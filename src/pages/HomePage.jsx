@@ -8,22 +8,17 @@ import { useEffect, useState } from "react";
 export default function HomePage() {
   const [recipes, setRecipes] = useState([]);
 
-    useEffect(() => {
-      const loadRecipes = async () => {
-        const { data, error } = await supabase
-          .from("opskrifter")
-          .select("id, navn, pris_portion, tid, billede, ingredienser_ids");
-  
-      if (error) {
-        console.error("Supabase error:", error);
-        return;
-      }
-  
-      setRecipes(data ?? []);
-      };
-  
-      loadRecipes();
-    }, [])
+  useEffect(() => {
+    const loadRecipes = async () => {
+      const { data, error } = await supabase
+        .from("opskrifter")
+        .select("id, navn, pris_portion, tid, billede, ingredienser_ids"); // Vi henter bare JSON-feltet
+
+      if (error) console.error("Supabase error:", error);
+      else setRecipes(data ?? []);
+    };
+    loadRecipes();
+  }, []);
 
   return (
     <>
@@ -39,6 +34,7 @@ export default function HomePage() {
           />
           <p className="home-text">Mer' end Toast</p>
         </article>
+
         <ProductGrid title="Mest populære" variant="horizontal">
           {recipes.map((recipe) => (
             <ProductCard
@@ -49,10 +45,12 @@ export default function HomePage() {
               price={recipe.pris_portion}
               time={recipe.tid}
               image={recipe.billede}
+              ingredients={recipe.ingredienser_ids} // <-- Du sender bare JSON-dataen råt med her!
             />
           ))}
         </ProductGrid>
-        <ProductGrid title="Hurtigt og billigt" variant="horizontal">
+
+        <ProductGrid title="Mest populære" variant="horizontal">
           {recipes.map((recipe) => (
             <ProductCard
               key={recipe.id}
@@ -62,10 +60,12 @@ export default function HomePage() {
               price={recipe.pris_portion}
               time={recipe.tid}
               image={recipe.billede}
+              ingredients={recipe.ingredienser_ids} // <-- Du sender bare JSON-dataen råt med her!
             />
           ))}
         </ProductGrid>
-        <ProductGrid title="Smagen af sommer" variant="horizontal">
+
+        <ProductGrid title="Mest populære" variant="horizontal">
           {recipes.map((recipe) => (
             <ProductCard
               key={recipe.id}
@@ -75,19 +75,22 @@ export default function HomePage() {
               price={recipe.pris_portion}
               time={recipe.tid}
               image={recipe.billede}
+              ingredients={recipe.ingredienser_ids} // <-- Du sender bare JSON-dataen råt med her!
             />
           ))}
         </ProductGrid>
-        <ProductGrid title="Blandet" variant="vertical">
+
+        <ProductGrid title="Mest populære" variant="horizontal">
           {recipes.map((recipe) => (
             <ProductCard
               key={recipe.id}
               id={recipe.id}
-              variant="large"
+              variant="small"
               title={recipe.navn}
               price={recipe.pris_portion}
               time={recipe.tid}
               image={recipe.billede}
+              ingredients={recipe.ingredienser_ids} // <-- Du sender bare JSON-dataen råt med her!
             />
           ))}
         </ProductGrid>
