@@ -490,9 +490,23 @@ main h3 {
   width: 16rem;
 }
 
-.modal-backdrop {
-  background-color: var(--container-color);
+.recipe-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+  z-index: 10000;
+}
+
+.recipe-modal {
+  background: var(--container-color);
   padding: 2rem;
+  border-radius: 2rem;
+  width: 50vw;
+  box-shadow: var(--shadow);
 }
 
 .onboarding-container {
@@ -606,4 +620,15 @@ main h3 {
   width: 100vw;
   height: 50vh;
   z-index: 10;
+}
+
+.toast-detailpage {
+  position: fixed;
+  top: 1rem;
+  right: 50vw;
+  background: var(--container-color);
+  color: var(--text-color);
+  padding: 1rem 2rem;
+  border-radius: 1rem;
+  z-index: 10000;
 }

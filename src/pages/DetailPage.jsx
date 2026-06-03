@@ -88,6 +88,20 @@ export default function DetailPage() {
     fetchIngredients();
   }, [recipe]);
 
+    useEffect(() => {
+      if (!toastSuccess) return;
+
+      function handleClick() {
+        setToastSuccess("");
+      }
+
+      window.addEventListener("click", handleClick);
+
+      return () => {
+        window.removeEventListener("click", handleClick);
+      };
+    }, [toastSuccess]);
+
   function handleAdded(selectedIds) {
     const updated = ingredients.map((item) => {
       if (selectedIds.includes(item.id)) {
@@ -104,7 +118,7 @@ export default function DetailPage() {
     <div className="detail-page">
 
       {toastSuccess && (
-        <div className="toast" onClick={() => setToastSuccess("")}>
+        <div className="toast-detailpage" onClick={() => setToastSuccess("")}>
           {toastSuccess}
         </div>
       )}

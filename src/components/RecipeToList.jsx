@@ -67,8 +67,8 @@ export default function RecipeToList({ isOpen, ingredients, onClose, onAdded, sh
   }
 
   return (
-    <div className="modal-backdrop">
-      <div className="modal">
+    <div className="recipe-modal-backdrop" onClick={onClose}>
+      <div className="recipe-modal" onClick={(e) => e.stopPropagation()}>
         <h3>
           Markér de ting du allerede har og resten bliver tilføjet til din
           indkøbsliste!
