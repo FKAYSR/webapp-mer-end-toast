@@ -46,7 +46,7 @@ export default function IngredientToList({ isOpen, onClose }) {
     setSearchInputValue(value);
 
     const match = dbIngredients.find(
-      (item) => item.navn.toLowerCase() === value.toLowerCase(), // Rettet: Stort C i toLowerCase
+      (item) => item.navn.toLowerCase() === value.toLowerCase(),
     );
 
     if (match) {
@@ -69,7 +69,7 @@ export default function IngredientToList({ isOpen, onClose }) {
 
       const { error } = await supabase
         .from("ingredienser")
-        .update({ added_to_list: true }) // Rettet: .updata til .update
+        .update({ added_to_list: true })
         .eq("id", existingItem.id);
 
       if (error) {
@@ -88,7 +88,7 @@ export default function IngredientToList({ isOpen, onClose }) {
         added_to_list: true,
       };
 
-      // OBS: Ændret fra "varer" til "ingredienser" så det matcher din fetch i toppen!
+      // Ændret fra "varer" til "ingredienser" så det matcher fetch i toppen
       const { error } = await supabase.from("ingredienser").insert([finalData]);
 
       if (error) {
@@ -129,7 +129,7 @@ export default function IngredientToList({ isOpen, onClose }) {
             />
           </label>
 
-          {/* Søgeforslag (Rettet id fra bindestreg til understreg, så det matcher inputfeltet) */}
+          {/* Søgefelt */}
           <datalist id="existing_ingredients">
             {dbIngredients.map((item, index) => (
               <option key={index} value={item.navn} />

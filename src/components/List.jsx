@@ -72,13 +72,7 @@ export default function List({ table = "ingredienser", showPrice = true }) {
                 <div className="liste-række">
                   <div
                     className="vare-tekst-klikbar"
-                    onClick={() => setSelectedItem(item)} // Nu virker denne perfekt!
-                    style={{
-                      flexGrow: 1,
-                      display: "flex",
-                      gap: "8px",
-                      cursor: "pointer",
-                    }}
+                    onClick={() => setSelectedItem(item)}
                   >
                     <span>{item.standard_mængde}</span>
                     <span>{item.enhed}</span>
@@ -87,8 +81,6 @@ export default function List({ table = "ingredienser", showPrice = true }) {
                     {showPrice && (
                       <span className="pris">
                         {Number(item.pris ?? 0).toLocaleString("da-DK", {
-                          minimumFractionDigits: 0,
-                          maximumFractionDigits: 2,
                         })}{" "}
                         kr
                       </span>

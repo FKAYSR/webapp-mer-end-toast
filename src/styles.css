@@ -71,7 +71,7 @@ body,
 
 body {
   margin: 0px;
-  min-width: 320px;
+  min-width: 100vw;
   min-height: 100vh;
   font-family: var(--font-family);
   font-size: var(--font-size-body);
@@ -149,7 +149,6 @@ main p {
 
 main img {
   display: block;
-  /* margin: 1rem 0; */
   border-radius: 8px;
 }
 
@@ -177,7 +176,6 @@ main h3 {
 
 .not-found {
   text-align: center;
-  padding: 3rem 2rem;
 }
 
 .not-found p {
@@ -187,14 +185,14 @@ main h3 {
 .not-found-link {
   color: var(--text-color);
   text-decoration: none;
-  background-color: var(--warning-color);
+  background-color: var(--brand-color);
   padding: 0.6rem 1.5rem;
   border-radius: var(--button-radius);
   transition: background-color 0.3s ease;
 }
 
 .not-found-link:hover {
-  background-color: var(--warning-click);
+  background-color: var(--button-click);
 }
 
 .liste-punkter {
@@ -243,6 +241,12 @@ main h3 {
   text-decoration: line-through;
   opacity: 0.5;
 }
+
+.vare-tekst-klikbar{
+  display: flex;
+  gap: 2rem;
+}
+
 
 .searchbar {
   position: fixed;

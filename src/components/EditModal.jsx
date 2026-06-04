@@ -150,20 +150,10 @@ export default function EditModal({ item, onClose, table, onRefresh }) {
 
           <div
             className="modal-actions"
-            style={{ display: "flex", gap: "10px", marginTop: "20px" }}
           >
             <button
               type="button"
               onClick={handleDelete}
-              style={{
-                color: "white",
-                backgroundColor: "#dc3545",
-                border: "none",
-                padding: "8px 12px",
-                borderRadius: "4px",
-                cursor: "pointer",
-                marginRight: "auto",
-              }}
             >
               Fjern fra liste
             </button>
