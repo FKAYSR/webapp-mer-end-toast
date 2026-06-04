@@ -1,25 +1,73 @@
 # Mer' end Toast
+> **Udviklere: Jeppe & Freja**
+>> Dette er vores eksamensprojekt afleveret d. 9 juni, 2026
+>>>*Her er link til vores webapp: [Github page](https://fkaysr.github.io/webapp-mer-end-toast/)*
 
 ## Hvad projektet indeholder
+Mer' end Toast er en webapp udviklet til brugere, der ønsker inspiration til madlavning baseret på de ingredienser, de allerede har til rådighed.
 
-## Hvem har lavet hvad?
-Jeppe - Supabase setup, AddAllergyModal, AddButton, IngredientToList, EditModal(List), Loading
-AllergyPage
+Brugeren kan søge efter ingredienser og få vist relevante opskrifter. Fra opskrifternes detaljesider kan ingredienser tilføjes direkte til en personlig indkøbsliste, som gemmes i Supabase.
 
-Freja - AddToShoppinglist, Deployment virker, Routing, Navbar, List, Checkbox, PreferenceButton, ProductCard, ProductGrid, RecipeToList, SearchEntry, SearchInput
-SearchPage, SavedPage, ProfilePage, ProductPage, OnboardingPage, HomePage
+Appen indeholder blandt andet:
 
-Begge - ShoppinglistPage, DetailPage
+- Søgning efter opskrifter baseret på ingredienser
+- Detaljesider med information om opskrifterne
+- Indkøbsliste med CRUD-funktionalitet
+- Profilside med allergier og præferencer
+- Allergi advarselsikon på ProductCards
+- Onboarding-flow
+- Loading states og brugerfeedback
+- Responsivt design
+- Animationer implementeret med Lottie
+
+Projektet er udviklet i React med Supabase som backend-løsning til lagring og håndtering af data.
+
+## Fordeling af ansvarsområder ift. koden
+### Jeppe 
+Ansvarlig for Supabase-opsætning, indkøbslistens CRUD-funktionalitet og allergi advarsel.
+
+Komponenter og sider:
+- AllergyPage
+- AddAllergyModal
+- AddButton
+- IngredientToList
+- EditModal
+- Loading animation
+
+### Freja 
+Ansvarlig for routing, navigation, søgefunktion, onboarding og deployment.
+
+Komponenter og sider:
+- AddToShoppinglist
+- Navbar
+- Checkbox
+- PreferenceButton
+- ProductCard
+- ProductGrid
+- RecipeToList
+- SearchEntry
+- SearchInput
+- SearchPage
+- SavedPage
+- ProfilePage
+- ProductPage
+- OnboardingPage
+- HomePage
+
+### Fælles ansvar
+- ShoppinglistPage
+- DetailPage
+- List komponent
+- CSS styling
 
 ## Projektstruktur
-
 ```
 .github/
   workflows/
     deploy.yml
 src/
   assets/
-    animaiton/
+    animation/
       onboarding-animation.json
     ikoner/
       add-to-shoppinglist-icon.svg
@@ -27,7 +75,7 @@ src/
       allergy-icon.svg
       app-icon.svg
       back-icon.svg
-      butik-icon-svg
+      butik-icon.svg
       close-icon-large.svg
       close-small-icon.svg
       food-preference-icon.svg
@@ -53,7 +101,7 @@ src/
     EditModal.jsx
     IngredientToList.jsx
     List.jsx
-    <!-- Loading.jsx -->
+    Loading.jsx
     Navbar.jsx
     ProductCard.jsx
     ProductGrid.jsx
@@ -82,3 +130,15 @@ package.json
 README.md
 vite.config.js
 ```
+## Teknologier
+- React
+- Vite
+- React Router
+- Supabase
+- HTML
+- CSS
+- JavaScript
+- Figma
+- Jitter
+- Lottie
+- GitHub / GitHub Pages
