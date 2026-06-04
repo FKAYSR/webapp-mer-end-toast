@@ -23,7 +23,7 @@ export default function EditModal({ item, onClose, table, onRefresh }) {
     async function hentAlleAfdelinger() {
       try {
         const { data, error } = await supabase
-          .from("ingredienser") // 👈 vigtigt: fast tabel
+          .from("ingredienser")
           .select("afdeling");
 
         if (error) throw error;

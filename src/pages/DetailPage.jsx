@@ -92,19 +92,19 @@ export default function DetailPage() {
     fetchIngredients();
   }, [recipe]);
 
-    useEffect(() => {
-      if (!toastSuccess) return;
+  useEffect(() => {
+    if (!toastSuccess) return;
 
-      function handleClick() {
-        setToastSuccess("");
-      }
+    function handleClick() {
+      setToastSuccess("");
+    }
 
-      window.addEventListener("click", handleClick);
+    window.addEventListener("click", handleClick);
 
-      return () => {
-        window.removeEventListener("click", handleClick);
-      };
-    }, [toastSuccess]);
+    return () => {
+      window.removeEventListener("click", handleClick);
+    };
+  }, [toastSuccess]);
 
   function handleAdded(selectedIds) {
     const updated = ingredients.map((item) => {
@@ -120,7 +120,6 @@ export default function DetailPage() {
 
   return (
     <div className="detail-page">
-
       {toastSuccess && (
         <div className="toast-detailpage" onClick={() => setToastSuccess("")}>
           {toastSuccess}
@@ -129,17 +128,13 @@ export default function DetailPage() {
 
       <div className="top-tag-container">
         <div className="small-tag">
-          <div>
-            <img src={TimeIcon} />
-          </div>
+          <img src={TimeIcon} />
           <p>{recipe.tid}</p>
         </div>
 
         {recipe.fryseegnet && (
           <div className="small-tag">
-            <div>
-              <img src={FreezeIcon} />
-            </div>
+            <img src={FreezeIcon} />
             <p>Fryseegnet</p>
           </div>
         )}
