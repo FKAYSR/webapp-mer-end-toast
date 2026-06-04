@@ -20,7 +20,6 @@ export default function ProductCard({
 
   useEffect(() => {
     if (!ingredients || ingredients.length === 0) {
-      setHasAllergy(false);
       return;
     }
 
@@ -31,6 +30,7 @@ export default function ProductCard({
         .eq("allergisk", true);
 
       if (!allergyData) return;
+
       const allergyIds = allergyData.map((ing) => ing.id);
 
       let ingredientsArray =
