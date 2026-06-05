@@ -67,6 +67,8 @@ body,
 #root {
   height: 100%;
   margin: 0;
+  padding: 0;
+  overflow-x: hidden;
 }
 
 body {
@@ -348,6 +350,7 @@ main h3 {
 
 .product-card-large {
   width: 100%;
+  box-sizing: border-box;
 }
 
 .product-card-image-wrapper {
