@@ -2,6 +2,8 @@ import { useCallback, useEffect, useState } from "react";
 import Checkbox from "./Checkbox";
 import EditModal from "./EditModal";
 import { supabase } from "../supabaseClient";
+import Toast from "../assets/animation/loading.json";
+import Lottie from "lottie-web";
 
 export default function List({ table = "ingredienser", showPrice = true }) {
   const [items, setItems] = useState([]);
@@ -80,9 +82,7 @@ export default function List({ table = "ingredienser", showPrice = true }) {
 
                     {showPrice && (
                       <span className="pris">
-                        {Number(item.pris ?? 0).toLocaleString("da-DK", {
-                        })}{" "}
-                        kr
+                        {Number(item.pris ?? 0).toLocaleString("da-DK", {})} kr
                       </span>
                     )}
                   </div>
