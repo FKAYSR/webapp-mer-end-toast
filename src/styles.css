@@ -545,18 +545,32 @@ main h3 {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 100%;
+  height: 100vh;
   width: 100%;
-  max-width: 480px;
-  padding: 5vh;
+  max-width: 420px;
+  padding: 4vh 2rem;
   box-sizing: border-box;
 }
 
-.logo-onboarding, .onboarding-ani {
+.logo-onboarding {
   width: auto;
   height: 100%;
   max-width: 100%;
   object-fit: contain;
+}
+
+.onboarding-ani {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.onboarding-ani svg {
+  width: auto !important;
+  height: 100% !important;
 }
 
 .top-bar {
@@ -564,7 +578,8 @@ main h3 {
   justify-content: space-between;
   align-items: center;
   height: 5vh;
-  padding: 20px 24px 0 24px;
+  width: 100%;
+  margin-bottom: 4vh;
 }
 
 .back-button {
@@ -587,10 +602,12 @@ main h3 {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: flex-start;
   align-items: center;
   text-align: center;
-  padding: 20px 24px 20px 24px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 2vh 0;
 }
 
 .preview-box{
@@ -599,6 +616,7 @@ main h3 {
   align-items: center;
   height: 40vh;
   width: 100%;
+  overflow: hidden;
 }
 
 .text-group {
@@ -606,28 +624,55 @@ main h3 {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  flex: 1;
-  justify-content: center;
-  gap: 5rem;
+  width: 100%;
+  gap: 4vh;
 }
 
 .slide-title {
   font-size: 2rem;
+  line-height: 1.5;
   margin: 0;
   color: var(--text-color);
   font-weight: 700;
-  max-height: 20vh;
+  width: 100%;
+  height: 12vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .bottom-zone {
   width: 100%;
-  height: 8vh;
   display: flex;
+  flex-direction: column;
   align-items: center;
+  gap: 1.5rem;
+}
+
+/* Containeren til de 3 prikker */
+.slide-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 2rem 0 0 0;
+}
+
+.dot {
+  width: 1rem;
+  height: 1rem;
+  background-color: var(--container-color);
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+}
+
+.dot.active {
+  background-color: var(--fifty-text-color); 
 }
 
 .primary-button {
   width: 100%;
+  box-sizing: border-box;
   background-color: var(--brand-color);
   color: var(--text-color);
   border: none;
