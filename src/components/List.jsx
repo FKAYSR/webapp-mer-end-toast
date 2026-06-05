@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import Checkbox from "./Checkbox";
 import EditModal from "./EditModal";
 import { supabase } from "../supabaseClient";
+import emptyState from "../assets/ikoner/shoppinglist-passive-icon.svg";
 
 export default function List({ table = "ingredienser", showPrice = true }) {
   const [items, setItems] = useState([]);
@@ -61,6 +62,20 @@ export default function List({ table = "ingredienser", showPrice = true }) {
 
   return (
     <>
+      {loading && <p className="list-loading">Indlæser...</p>}
+      {error && <p className="list-error">Fejl: {error.message}</p>}
+
+      {!loading && items.length === 0 && (
+        <div className="empty-list-container">
+          <div className="empty-list-icon"> <img src={emptyState} alt="Tom indkøbsliste" className="empty-list-svg"/></div>
+          <h3 className="empty-list-title">Din indkøbsliste er tom...</h3>
+          <p className="empty-list-text">
+            Du har ikke tilføjet nogen ingredienser endnu. Gå til Opdag for
+            at finde nye opskrifter og ingredienser.
+          </p>
+        </div>
+      )}
+
       {Object.entries(groupedItems).map(([afdeling, afdelingItems]) => (
         <section key={afdeling}>
           <h2>{afdeling}</h2>
@@ -80,9 +95,7 @@ export default function List({ table = "ingredienser", showPrice = true }) {
 
                     {showPrice && (
                       <span className="pris">
-                        {Number(item.pris ?? 0).toLocaleString("da-DK", {
-                        })}{" "}
-                        kr
+                        {Number(item.pris ?? 0).toLocaleString("da-DK", {})} kr
                       </span>
                     )}
                   </div>

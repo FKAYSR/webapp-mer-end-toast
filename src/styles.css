@@ -247,6 +247,45 @@ main h3 {
   gap: 2rem;
 }
 
+.empty-list-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 4rem 2rem;
+  height: 50vh;
+}
+
+.empty-list-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50vw;
+  height: 50vh;
+  margin-bottom: 1rem;
+}
+
+.empty-list-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text-color);
+  margin: 0 0 0.5rem 0;
+}
+
+.empty-list-text {
+  font-size: 1rem;
+  color: var(--darkest-grey);
+  max-width: 100vw;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.empty-list-svg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
 
 .searchbar {
   position: fixed;
