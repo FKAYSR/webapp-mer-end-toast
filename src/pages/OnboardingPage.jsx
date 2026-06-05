@@ -39,7 +39,7 @@ const OnboardingPage = () => {
   console.log(animation1);
   return (
     <div className="onboarding-container">
-      <div className="phone-wrapper">
+      <div>
         <div className="top-bar">
           {currentSlide > 1 ? (
             <button className="back-button" onClick={prevSlide}>
