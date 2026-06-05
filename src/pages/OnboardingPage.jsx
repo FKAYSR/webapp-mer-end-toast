@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 import { useEffect, useRef, useState } from "react";
 import lottie from "lottie-web";
 import animation1 from "../assets/animation/onboarding-animation.json";
+import backIcon from "../assets/ikoner/back-icon.svg"
 
 const OnboardingPage = () => {
   const [currentSlide, setCurrentSlide] = useState(1);
@@ -39,16 +40,15 @@ const OnboardingPage = () => {
   console.log(animation1);
   return (
     <div className="onboarding-container">
-      <div className="phone-wrapper">
+      <div className="onboarding-wrapper">
         <div className="top-bar">
           {currentSlide > 1 ? (
             <button className="back-button" onClick={prevSlide}>
-              ← Tilbage
+              <img src={backIcon} alt="Tilbage" className="back-icon-onboarding" />
             </button>
           ) : (
             <div />
           )}
-          <span className="slide-indicator">{currentSlide} / 3</span>
         </div>
 
         <div className="slide-content">
@@ -68,7 +68,9 @@ const OnboardingPage = () => {
           {/* SLIDE 2 */}
           {currentSlide === 2 && (
             <div className="text-group">
-              <h1 className="slide-title">Spar penge og få mere overskud i hverdagen</h1>
+              <h1 className="slide-title">
+                Spar penge og få mere overskud i hverdagen
+              </h1>
               <div className="preview-box">
                 <div ref={animationContainer} className="onboarding-ani" />
               </div>
@@ -90,6 +92,18 @@ const OnboardingPage = () => {
 
           {/* NAVIGATION I BUNDEN */}
           <div className="bottom-zone">
+            <div className="slide-dots">
+              <span
+                className={`dot ${currentSlide === 1 ? "active" : ""}`}
+              ></span>
+              <span
+                className={`dot ${currentSlide === 2 ? "active" : ""}`}
+              ></span>
+              <span
+                className={`dot ${currentSlide === 3 ? "active" : ""}`}
+              ></span>
+            </div>
+
             {currentSlide < 3 ? (
               <button className="primary-button" onClick={nextSlide}>
                 Fortsæt

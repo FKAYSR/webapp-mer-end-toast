@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 import { supabase } from "../supabaseClient";
 import AddAllergyModal from "../components/AddAllergyModal";
 import AllergyIcon from "../assets/ikoner/allergy-warning-icon.svg";
 import CloseIconSmall from "../assets/ikoner/close-small-icon.svg";
 import AddButton from "../assets/ikoner/addButton.svg";
+import backIcon from "../assets/ikoner/back-icon.svg";
 
 export default function AllergyPage() {
   const [allergicIngredients, setAllergicIngredients] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const navigate = useNavigate();
 
   const fetchAllergies = async () => {
     const { data, error } = await supabase
@@ -45,7 +48,13 @@ export default function AllergyPage() {
 
   return (
     <div className="allergy-page">
-      <header>
+      <header className="allergy-header">
+        <button
+          type="button"
+          className="back-button-allergy"
+          onClick={() => navigate(-1)}>
+          <img src={backIcon} alt="Tilbage" className="back-icon-img" />
+        </button>
         <h1>Mine allergier</h1>
       </header>
       <main>
