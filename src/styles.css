@@ -752,6 +752,7 @@ main h3 {
   border: none;
   margin-top: 1rem;
   margin-bottom: 1rem;
+  cursor: pointer;
 }
 
 .active-allergy-container {
@@ -773,6 +774,7 @@ main h3 {
   align-items: center;
   height: fit-content;
   box-shadow: var(--shadow);
+  cursor: pointer;
 }
 
 .active-tag span {
@@ -812,6 +814,7 @@ main h3 {
   background: none;
   border: none;
   height: 100%;
+  cursor: pointer;
 }
 
 .søgefelt {
@@ -842,6 +845,10 @@ main h3 {
   border: 1px solid var(--light-grey);
 }
 
+.ingrediens-punkt {
+  cursor: pointer;
+}
+
 .allergy-page {
   display: flex;
   flex-direction: column;
@@ -858,6 +865,42 @@ main h3 {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
+}
+
+.allergy-header {
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+  position: relative;
+  width: 100%;
+  padding: 20px 0;
+}
+
+.back-button-allergy {
+  position: absolute;
+  left: 1.5rem; 
+  top: 50%;
+  transform: translateY(-50%); 
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.back-icon-img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.allergy-header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
 }
 
 .ingredient-to-list-modal {
