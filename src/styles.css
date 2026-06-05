@@ -242,7 +242,7 @@ main h3 {
   opacity: 0.5;
 }
 
-.vare-tekst-klikbar{
+.vare-tekst-klikbar {
   display: flex;
   gap: 2rem;
 }
@@ -996,4 +996,17 @@ form select {
 
 .detail-page h1 {
   margin: 0;
+}
+
+.toast-loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px;
+  width: 100%;
+  height: 100%;
+}
+
+.toast-animation {
+  width: 50vw;
 }

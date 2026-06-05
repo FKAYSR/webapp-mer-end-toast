@@ -3,6 +3,8 @@ import Checkbox from "./Checkbox";
 import EditModal from "./EditModal";
 import { supabase } from "../supabaseClient";
 import emptyState from "../assets/ikoner/shoppinglist-passive-icon.svg";
+import Toast from "../assets/animation/loading.json";
+import Lottie from "lottie-web";
 
 export default function List({ table = "ingredienser", showPrice = true }) {
   const [items, setItems] = useState([]);
