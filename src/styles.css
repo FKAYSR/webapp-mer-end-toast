@@ -237,6 +237,7 @@ main h3 {
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  gap: 1rem;
 }
 
 .liste-række:has(input[type="checkbox"]:checked) .vare-tekst-klikbar {
@@ -244,9 +245,22 @@ main h3 {
   opacity: 0.5;
 }
 
-.vare-tekst-klikbar{
+.vare-tekst-klikbar {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-grow: 1;
   gap: 2rem;
+}
+
+.vare-info {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.pris {
+  color: var(--price-color);
+  margin-left: auto;
 }
 
 .empty-list-container {
@@ -652,7 +666,7 @@ main h3 {
   padding: 2vh 0;
 }
 
-.preview-box{
+.preview-box {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -709,7 +723,7 @@ main h3 {
 }
 
 .dot.active {
-  background-color: var(--fifty-text-color); 
+  background-color: var(--fifty-text-color);
 }
 
 .primary-button {
@@ -873,7 +887,7 @@ main h3 {
 .allergy-header {
   display: flex;
   align-items: center;
-  justify-content: center; 
+  justify-content: center;
   position: relative;
   width: 100%;
   padding: 20px 0;
@@ -881,9 +895,9 @@ main h3 {
 
 .back-button-allergy {
   position: absolute;
-  left: 1.5rem; 
+  left: 1.5rem;
   top: 50%;
-  transform: translateY(-50%); 
+  transform: translateY(-50%);
   background: none;
   border: none;
   cursor: pointer;

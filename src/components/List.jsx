@@ -67,11 +67,18 @@ export default function List({ table = "ingredienser", showPrice = true }) {
 
       {!loading && items.length === 0 && (
         <div className="empty-list-container">
-          <div className="empty-list-icon"> <img src={emptyState} alt="Tom indkøbsliste" className="empty-list-svg"/></div>
+          <div className="empty-list-icon">
+            {" "}
+            <img
+              src={emptyState}
+              alt="Tom indkøbsliste"
+              className="empty-list-svg"
+            />
+          </div>
           <h3 className="empty-list-title">Din indkøbsliste er tom...</h3>
           <p className="empty-list-text">
-            Du har ikke tilføjet nogen ingredienser endnu. Gå til Opdag for
-            at finde nye opskrifter og ingredienser.
+            Du har ikke tilføjet nogen ingredienser endnu. Gå til Opdag for at
+            finde nye opskrifter og ingredienser.
           </p>
         </div>
       )}
@@ -89,9 +96,11 @@ export default function List({ table = "ingredienser", showPrice = true }) {
                     className="vare-tekst-klikbar"
                     onClick={() => setSelectedItem(item)}
                   >
-                    <span>{item.standard_mængde}</span>
-                    <span>{item.enhed}</span>
-                    <span>{item.navn}</span>
+                    <div className="vare-info">
+                      <span>{item.standard_mængde}</span>
+                      <span>{item.enhed}</span>
+                      <span>{item.navn}</span>
+                    </div>
 
                     {showPrice && (
                       <span className="pris">
