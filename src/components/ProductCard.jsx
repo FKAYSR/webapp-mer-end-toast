@@ -10,9 +10,9 @@ export default function ProductCard({
   time,
   image,
   variant = "large",
-  ingredients = [], // Modtager dit jsonb-felt fra databasen
+  ingredients = [], // Modtager jsonb-felt fra databasen
 }) {
-  // DIN ORIGINALE KLASSE-LOGIK (Nu virker varianten igen!)
+ 
   const cardClassName = `product-card product-card-${variant}`;
   const navigate = useNavigate();
 
