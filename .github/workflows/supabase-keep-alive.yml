@@ -1,0 +1,22 @@
+name: Supabase keep alive
+
+on:
+  schedule:
+    - cron: "0 6 * * 1,4" # mandag og torsdag kl. 06 (UTC)
+  workflow_dispatch: # gør det muligt at køre den manuelt
+
+jobs:
+  ping:
+    # Henter variablerne fra samme environment som dit deploy-workflow
+    environment: github-pages-deployment
+    runs-on: ubuntu-latest
+    env:
+      # Tilpas til en tabel, der findes i dit Supabase-projekt
+      PING_TABLE: ingredienser
+    steps:
+      # VITE_SUPABASE_URL ender på /rest/v1, så tabelnavnet tilføjes her
+      - name: Ping Supabase
+        run: |
+          curl --fail -sS -o /dev/null \
+            "${{ vars.VITE_SUPABASE_URL }}/rest/v1/$PING_TABLE?select=*&limit=1" \
+            -H "apikey: ${{ vars.VITE_SUPABASE_APIKEY }}"
